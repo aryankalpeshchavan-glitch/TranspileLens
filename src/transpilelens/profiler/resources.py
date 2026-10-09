@@ -1,4 +1,4 @@
-from typing import Dict, Any
+from typing import Dict, Any, Optional
 from pydantic import BaseModel
 from qiskit import QuantumCircuit
 
@@ -10,9 +10,6 @@ class ResourceProfile(BaseModel):
     gate_counts: Dict[str, int]
 
 def profile_resources(qc: QuantumCircuit) -> ResourceProfile:
-    """
-    Extracts structural resource metrics from a QuantumCircuit.
-    """
     if not isinstance(qc, QuantumCircuit):
         raise ValueError("Input must be a QuantumCircuit")
         
@@ -21,7 +18,6 @@ def profile_resources(qc: QuantumCircuit) -> ResourceProfile:
     depth = qc.depth()
     width = qc.num_qubits
     
-    # Calculate two-qubit operations
     two_qubit_ops = 0
     for instr in qc.data:
         if len(instr.qubits) == 2:
@@ -36,12 +32,9 @@ def profile_resources(qc: QuantumCircuit) -> ResourceProfile:
     )
 
 def calculate_resource_delta(ref: ResourceProfile, cand: ResourceProfile) -> Dict[str, Any]:
-    """
-    Calculates differences between candidate and reference resources.
-    """
-    def delta_and_relative(r, c):
+    def delta_and_relative(r: int, c: int) -> Dict[str, Optional[float]]:
         d = c - r
-        rel = d / r if r != 0 else None
+        rel = (d / r) if r != 0 else None
         return {"delta": d, "relative": rel}
         
     return {
