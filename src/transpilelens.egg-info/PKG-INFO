@@ -1,0 +1,17 @@
+Metadata-Version: 2.4
+Name: transpilelens
+Version: 0.1.0
+Summary: Interpretable, deterministic profiling of quantum circuit transformations.
+Author: Aryan Chavan, Ananya
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: qiskit>=1.0.0
+Requires-Dist: mqt.qcec>=2.0.0
+Requires-Dist: networkx
+Requires-Dist: scipy
+Requires-Dist: numpy
+Requires-Dist: pydantic
+Provides-Extra: test
+Requires-Dist: pytest; extra == "test"
+Dynamic: license-file

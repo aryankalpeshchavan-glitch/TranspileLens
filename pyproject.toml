@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "transpilelens"
+version = "0.1.0"
+description = "Interpretable, deterministic profiling of quantum circuit transformations."
+authors = [
+    {name = "Aryan Chavan"},
+    {name = "Ananya"}
+]
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "qiskit>=1.0.0",
+    "mqt.qcec>=2.0.0",
+    "networkx",
+    "scipy",
+    "numpy",
+    "pydantic"
+]
+
+[project.optional-dependencies]
+test = [
+    "pytest"
+]
+
+[project.scripts]
+transpilelens = "transpilelens.cli:main"
