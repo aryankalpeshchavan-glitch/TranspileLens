@@ -27,3 +27,65 @@ def build_e2_candidate(reference: QuantumCircuit) -> QuantumCircuit:
     # Using basis gates like ['cx', 'u3'] or ['cz', 'rx', 'ry', 'rz'] might produce different depth
     candidate = transpile(reference, optimization_level=3, basis_gates=['cz', 'u'])
     return candidate
+
+def build_e1_reference() -> QuantumCircuit:
+    qc = QuantumCircuit(1)
+    qc.h(0)
+    return qc
+    
+def build_e1_candidate(reference: QuantumCircuit) -> QuantumCircuit:
+    qc = QuantumCircuit(1)
+    # y^(1/2) * z
+    qc.ry(3.14159265359 / 2, 0)
+    qc.z(0)
+    return qc
+
+def build_e3_reference() -> QuantumCircuit:
+    qc = QuantumCircuit(3)
+    qc.cx(0, 2)
+    return qc
+
+def build_e3_candidate(reference: QuantumCircuit) -> QuantumCircuit:
+    qc = QuantumCircuit(3)
+    # Routing 0 to 2 via 1 using a swap
+    qc.swap(0, 1)
+    qc.cx(1, 2)
+    qc.swap(0, 1)
+    return qc
+
+def build_e4_reference() -> QuantumCircuit:
+    qc = QuantumCircuit(1)
+    qc.x(0)
+    return qc
+
+def build_e4_candidate(reference: QuantumCircuit) -> QuantumCircuit:
+    qc = QuantumCircuit(1)
+    qc.x(0)
+    qc.x(0)
+    qc.x(0) # identity insertion x*x = I
+    return qc
+
+def build_e5_reference() -> QuantumCircuit:
+    qc = QuantumCircuit(1, 1)
+    qc.h(0)
+    qc.measure(0, 0)
+    return qc
+
+def build_e5_candidate(reference: QuantumCircuit) -> QuantumCircuit:
+    qc = QuantumCircuit(2, 2)
+    qc.h(1)
+    qc.measure(1, 1) # mapped to different physical and classical bits
+    return qc
+
+def build_e6_reference() -> QuantumCircuit:
+    qc = QuantumCircuit(2)
+    qc.cx(0, 1)
+    return qc
+
+def build_e6_candidate(reference: QuantumCircuit) -> QuantumCircuit:
+    qc = QuantumCircuit(3)
+    # E6a: detour routing that is not straightforward SWAPs
+    qc.cx(0, 2)
+    qc.cx(2, 1)
+    qc.cx(0, 2)
+    return qc
