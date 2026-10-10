@@ -10,4 +10,7 @@
 | M6 | Implemented | Measurement and routing analysis | `test_profilers.py` | Passed | Validated | `00ec9ad` | Success | Routing heuristic is purely structural/greedy right now |
 | M7 | Implemented | Delta Profile schema integration | `test_delta_profile.py` | Passed | Validated | (pending) | Pending | N/A |
 | M8 | Implemented | Deterministic evidence categorizer | `test_categorizer.py` | Passed | Validated | (pending) | Pending | Simple heuristic for optimization/synthesis boundaries |
-| M9 | Implemented | E1-E6 experimental corpus | `test_corpus.py` | Passed | Validated | (pending) | Pending | Synthetic tests serve to bound heuristic limitations |
+| M9 | Implemented | E1-E6 experimental corpus | `test_corpus.py` | Passed | Validated | `82e404d` | Success | Synthetic tests serve to bound heuristic limitations |
+| M10 | Implemented | Legitimate corpus & 5 baselines | `test_m10.py` (via runner) | Passed | Validated | (pending) | Pending | Raw diff/pass metrics limited by Qiskit post-hoc capabilities |
+| M11 | Implemented | Reproducible experiment runner | (manual execution) | Passed | Validated | (pending) | Pending | Produces results.json accurately representing structural profiles |
+| M12 | Implemented | Dashboard | (manual review) | Passed | Validated | (pending) | Pending | Simple HTML/JS to parse generated results locally |

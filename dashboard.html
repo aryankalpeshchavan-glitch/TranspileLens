@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TranspileLens Dashboard</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 20px; background-color: #f5f5f5; color: #333; }
+        h1, h2, h3 { color: #111; }
+        .container { max-width: 1000px; margin: 0 auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .experiment-card { border: 1px solid #ddd; border-radius: 4px; padding: 15px; margin-bottom: 15px; }
+        .badge { display: inline-block; padding: 4px 8px; border-radius: 12px; font-size: 12px; font-weight: bold; margin-right: 5px; }
+        .badge.equivalent { background-color: #d4edda; color: #155724; }
+        .badge.not_equivalent { background-color: #f8d7da; color: #721c24; }
+        .badge.inconclusive { background-color: #fff3cd; color: #856404; }
+        .badge.PASS { background-color: #cce5ff; color: #004085; }
+        .badge.FAIL { background-color: #f8d7da; color: #721c24; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f8f9fa; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>TranspileLens Dashboard</h1>
+        <p>Results loaded from <code>results.json</code>.</p>
+        
+        <h2>Experimental Corpus (E1-E6)</h2>
+        <div id="experiments-container"></div>
+        
+        <h2>Legitimate Corpus (L1-L3) & Baselines</h2>
+        <div id="legitimate-container"></div>
+    </div>
+
+    <script>
+        fetch('results.json')
+            .then(res => res.json())
+            .then(data => {
+                const expContainer = document.getElementById('experiments-container');
+                data.experiments.forEach(exp => {
+                    const prof = exp.profile;
+                    expContainer.innerHTML += `
+                        <div class="experiment-card">
+                            <h3>${exp.case_id} <span class="badge ${exp.acceptance}">${exp.acceptance}</span></h3>
+                            <p><strong>Category:</strong> ${prof.interpretation.category_name} (Rule ${prof.interpretation.category_id})</p>
+                            <p><strong>Semantic Status:</strong> <span class="badge ${prof.semantic.status}">${prof.semantic.status}</span></p>
+                            <p><strong>Evidence:</strong> ${prof.interpretation.evidence}</p>
+                            <details>
+                                <summary>Show Profile Details</summary>
+                                <pre>${JSON.stringify(prof, null, 2)}</pre>
+                            </details>
+                        </div>
+                    `;
+                });
+
+                const legContainer = document.getElementById('legitimate-container');
+                data.legitimate.forEach(leg => {
+                    legContainer.innerHTML += `
+                        <div class="experiment-card">
+                            <h3>${leg.case_id}: ${leg.name}</h3>
+                            <table>
+                                <tr><th>Baseline</th><th>Result Summary</th></tr>
+                                <tr><td>B1 (QASM Diff)</td><td>Added: ${leg.baselines.B1.added_lines}, Removed: ${leg.baselines.B1.removed_lines}</td></tr>
+                                <tr><td>B2 (Pass Log)</td><td>${leg.baselines.B2.status}</td></tr>
+                                <tr><td>B3 (QCEC)</td><td>${leg.baselines.B3.semantic_status}</td></tr>
+                                <tr><td>B4 (Resource Only)</td><td>Ops Delta: ${leg.baselines.B4.ops_delta}</td></tr>
+                                <tr><td>B5 (TranspileLens)</td><td>Supported via runner.</td></tr>
+                            </table>
+                        </div>
+                    `;
+                });
+            })
+            .catch(err => {
+                document.body.innerHTML += `<p style="color:red">Failed to load results.json. Serve with a local web server to avoid CORS issues.</p>`;
+            });
+    </script>
+</body>
+</html>
