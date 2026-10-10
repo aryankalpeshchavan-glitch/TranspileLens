@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>TranspileLens Observatory</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;600&display=swap">
+<style>
+:root{--navy:#10172A;--blue:#0F62FE;--cyan:#36C5F0;--pale:#E8F3FF;--canvas:#F3F6FA;--card:#fff;--tx:#161B2E;--tx2:#526176;--bd:#D8E0EB;--ok:#198038;--bad:#DA1E28;--warn:#B28600}
+:root:not([data-theme="light"]){}
+
+
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{font-family:'IBM Plex Sans',system-ui,sans-serif;background:var(--canvas);color:var(--tx)}
+#root{min-height:100%}
+.app{display:grid;grid-template-columns:232px 1fr;grid-template-rows:56px 1fr;min-height:100vh}
+.top{grid-column:1/3;background:var(--card);border-bottom:1px solid var(--bd);display:flex;align-items:center;gap:16px;padding:0 20px}
+.brand{font-weight:600;font-size:15px;width:196px;display:flex;align-items:center;gap:10px}
+.search{flex:1;max-width:420px;height:36px;background:var(--canvas);border:0;border-bottom:1px solid var(--bd);padding:0 12px;color:var(--tx);font:inherit;font-size:13px}
+.side{background:var(--card);border-right:1px solid var(--bd);padding:16px 0}
+.side button{display:block;width:100%;text-align:left;background:none;border:0;border-left:3px solid transparent;padding:12px 20px;font:inherit;font-size:14px;color:var(--tx);cursor:pointer}
+.side button:hover{background:var(--canvas)}
+.side button[aria-current="page"]{background:var(--canvas);border-left-color:var(--blue);font-weight:600}
+.side small{display:block;padding:24px 20px 6px;font-size:12px;color:var(--tx2)}
+main{padding:24px 28px 48px;min-width:0}
+h1{font-size:32px;font-weight:300;margin:0 0 4px}
+.sub{color:var(--tx2);font-size:14px;margin:0 0 20px;max-width:640px;line-height:1.5}
+.g{display:grid;gap:16px;margin-bottom:16px}
+.k3{grid-template-columns:repeat(3,1fr)}
+.r2{grid-template-columns:1.9fr 1fr}
+.r3{grid-template-columns:1fr 1.4fr}
+.c{background:var(--card);padding:18px 20px;min-width:0}
+.c h3{margin:0 0 12px;font-size:15px;font-weight:400;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.kh{display:flex;align-items:center;gap:8px;font-size:15px}
+.bg{font-size:11.5px;padding:2px 7px;font-family:'IBM Plex Mono',monospace}
+.bg.ok{background:#A7F0BA;color:#044317}.bg.bad{background:#FFD7D9;color:#750E13}.bg.warn{background:#FCF4D6;color:#5E4B00}.bg.hv{background:var(--pale);color:#0043CE}
+.big{font-size:36px;font-weight:600;line-height:1.1;margin:14px 0 4px}
+.mut{font-size:12.5px;color:var(--tx2)}
+.tb{width:100%;border-collapse:collapse;font-size:13px}
+.tb th{text-align:left;font-weight:400;color:var(--tx2);font-size:12px;padding:8px 10px;border-bottom:1px solid var(--bd)}
+.tb td{padding:9px 10px;border-bottom:1px solid var(--bd)}
+.tb tr[data-s="1"] td{background:var(--pale)}.tb tr{cursor:pointer}
+.lg{display:grid;grid-template-columns:12px 1fr auto auto;gap:10px;align-items:center;font-size:13px;padding:7px 0}
+.dot{width:10px;height:10px;border-radius:50%}
+.un{color:var(--tx2);font-family:'IBM Plex Mono',monospace;font-size:12px}
+.pipe{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--bd);border:1px solid var(--bd);margin-bottom:16px}
+.pipe div{background:var(--card);padding:16px;font-size:13.5px}
+.pipe div.k{background:var(--pale);color:#0043CE;font-weight:600}
+.note{font-size:12px;color:var(--tx2);margin-top:10px;line-height:1.5}
+@media(max-width:1000px){.app{grid-template-columns:1fr}.top{grid-column:1}.side{display:flex;overflow-x:auto;padding:0;border-right:0;border-bottom:1px solid var(--bd)}.side small{display:none}.side button{width:auto;white-space:nowrap;border-left:0;border-bottom:3px solid transparent}.side button[aria-current="page"]{border-bottom-color:var(--blue)}.k3,.r2,.r3{grid-template-columns:1fr}.brand{width:auto}.search{display:none}}
+.pv{background:#fff;color:#161B2E;box-shadow:0 28px 70px rgba(6,16,50,.5);border-radius:6px;overflow:hidden;font-size:11px}
+.pvt{display:flex;align-items:center;gap:6px;padding:10px 14px;background:#F3F6FA;border-bottom:1px solid #D8E0EB}
+.pvt i{width:9px;height:9px;border-radius:50%;background:#C6D2E4}.pvt b{margin-left:10px;font-weight:600;font-size:12px}
+.pvb{display:grid;grid-template-columns:132px 1fr}
+.pvs{border-right:1px solid #D8E0EB;padding:10px 0}.pvs div{padding:9px 14px;color:#526176;border-left:3px solid transparent}.pvs div.on{background:#F3F6FA;border-left-color:#0F62FE;color:#161B2E;font-weight:600}
+.pvm{background:#F3F6FA;padding:14px;display:grid;gap:10px}
+.pvk{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.pvk div{background:#fff;padding:10px}.pvk small{display:block;color:#526176}.pvk b{font-size:28px;font-weight:600}
+.pvr{display:grid;grid-template-columns:1.5fr 1fr;gap:10px}.pvr>div{background:#fff;padding:10px}.pvr small{color:#526176}
+.ov{overflow-x:auto}
+.hero{min-height:100vh;display:flex;color:#fff;background:linear-gradient(rgba(255,255,255,.07) 1px,transparent 1px) 0 0/56px 56px,linear-gradient(90deg,rgba(255,255,255,.07) 1px,transparent 1px) 0 0/56px 56px,linear-gradient(135deg,#0F62FE 0%,#0043CE 42%,#162443 100%)}
+.hwrap{width:100%;max-width:1344px;margin:0 auto;padding:0 32px;display:flex;flex-direction:column;min-height:100vh}
+.hnav{display:flex;align-items:center;justify-content:space-between;height:72px;border-bottom:1px solid rgba(255,255,255,.28);gap:16px}
+.hnav nav{display:flex;gap:28px;font-size:14px}
+.hnav a{text-decoration:none}.hnav nav a{color:#D6E4FF}.hnav nav a:hover{color:#fff}
+.hbn{display:inline-flex;align-items:center;height:48px;padding:0 24px;font-size:14px;font-weight:500;text-decoration:none;border:1px solid #0F62FE}
+.hbn.p{background:#fff;color:#0043CE;border-color:#fff}.hbn.s{color:#fff;background:transparent;border-color:rgba(255,255,255,.65)}
+.hgrid{flex:1;display:grid;grid-template-columns:1fr 1.1fr;gap:40px;align-items:center;padding:32px 0}
+.eb{font-size:14px;font-weight:600;color:#A6C8FF;margin:0}
+.hh{font-size:60px;line-height:1.06;font-weight:300;letter-spacing:-.02em;margin:14px 0 20px;color:#fff}
+.hp{font-size:18px;line-height:1.6;color:#D6E4FF;max-width:500px;margin:0 0 32px}
+.hcta{display:flex;gap:12px;flex-wrap:wrap}
+.hq{margin:36px 0 0;font-size:14px;color:#D6E4FF;border-left:3px solid #fff;padding-left:12px}
+.hstats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:32px}
+.hs{background:#fff;color:#161B2E;padding:16px 20px;display:flex;flex-direction:column;gap:4px;border-top:4px solid var(--c)}
+
+.hs b{font-size:34px;font-weight:300}.hs span{font-size:13px;color:#526176}
+@media(max-width:1000px){.hgrid{grid-template-columns:1fr}.hh{font-size:40px}.hnav nav{display:none}.hstats{grid-template-columns:1fr 1fr}.pvb{grid-template-columns:1fr}.pvs{display:none}}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js"></script>
+<script>
+const h = React.createElement, {useState, useEffect, useRef} = React;
+/* Real fields from the loaded dataset screens. d/o are APPROXIMATE depth/ops deltas read from the earlier chart; null = unavailable. */
+const EXP = [
+ {id:'E1',cat:'Logical computation change',s:'ne',d:1,o:1},
+ {id:'E2',cat:'Equivalent routing/layout',s:'ok',d:-4,o:-5},
+ {id:'E3',cat:'Equivalent routing/layout',s:'ok',d:2,o:2},
+ {id:'E4',cat:'Resource-only change',s:'ok',d:2,o:2},
+ {id:'E5',cat:'Logical computation change',s:'ne',d:null,o:null},
+ {id:'E6',cat:'Equivalent routing/layout',s:'ok',d:2,o:2},
+ {id:'L1',cat:null,s:'ok',d:null,o:null},{id:'L2',cat:null,s:'ok',d:null,o:null},{id:'L3',cat:null,s:'ok',d:null,o:null}
+];
+const badge = e => h('span',{className:'bg '+(e.s==='ok'?'ok':'bad')}, e.s==='ok'?'EQUIVALENT':'INEQUIVALENT');
+const fmt = v => v===null?h('span',{className:'un'},'unavailable'):(v>0?'+'+v:String(v));
+
+function Preview(){
+  const E=EXP.slice(0,6), C=2*Math.PI*30;
+  return h('div',{className:'pv',role:'img','aria-label':'Preview of the TranspileLens observatory dashboard'},
+    h('div',{className:'pvt'},h('i'),h('i'),h('i'),h('b',null,'TranspileLens Observatory')),
+    h('div',{className:'pvb'},
+      h('div',{className:'pvs'},['Overview','Experiment Explorer','Resource Analysis','Structural Analysis','Methodology'].map((n,i)=>h('div',{key:n,className:i?'':'on'},n))),
+      h('div',{className:'pvm'},
+        h('div',{className:'pvk'},[['Equivalent',7,'#198038'],['Not equivalent',2,'#DA1E28'],['Inconclusive',0,'#B28600']].map(([n,v,c])=>h('div',{key:n,style:{borderTop:'3px solid '+c}},h('small',null,n),h('b',null,v)))),
+        h('div',{className:'pvr'},
+          h('div',null,h('small',null,'Resource deltas'),h('svg',{viewBox:'0 0 220 110',style:{width:'100%'}},h('line',{x1:0,x2:220,y1:55,y2:55,stroke:'#D8E0EB'}),
+            E.map((e,i)=>e.d===null?h('text',{key:e.id,x:14+i*35,y:50,fontSize:7,fill:'#526176'},'n/a'):h('g',{key:e.id},h('rect',{x:8+i*35,y:e.d>0?55-e.d*8:55,width:12,height:Math.abs(e.d)*8,fill:'#0F62FE'}),h('rect',{x:21+i*35,y:e.o>0?55-e.o*8:55,width:12,height:Math.abs(e.o)*8,fill:'#A6C8FF'}))),
+            E.map((e,i)=>h('text',{key:'l'+e.id,x:20+i*35,y:106,fontSize:8,textAnchor:'middle',fill:'#526176'},e.id)))),
+          h('div',null,h('small',null,'Semantic outcomes'),h('svg',{viewBox:'0 0 80 80',style:{width:'100%',maxWidth:96,display:'block',margin:'6px auto'}},
+            h('circle',{cx:40,cy:40,r:30,fill:'none',stroke:'#198038',strokeWidth:11,strokeDasharray:(7/9*C)+' '+C,transform:'rotate(-90 40 40)'}),
+            h('circle',{cx:40,cy:40,r:30,fill:'none',stroke:'#DA1E28',strokeWidth:11,strokeDasharray:(2/9*C)+' '+C,strokeDashoffset:-(7/9*C),transform:'rotate(-90 40 40)'}),
+            h('text',{x:40,y:45,textAnchor:'middle',fontSize:15,fontWeight:600,fill:'#161B2E'},'9')))))));
+}
+
+function Wide({sel,setSel}){
+  const sc=16, base=120, xs=EXP.slice(0,6);
+  return h('div',null,h('svg',{viewBox:'0 0 640 250',style:{width:'100%',height:'auto'},role:'img','aria-label':'Depth and operations deltas per experiment'},
+    [-4,-2,0,2,4].map(v=>h('g',{key:v},h('line',{x1:40,x2:630,y1:base-v*sc,y2:base-v*sc,stroke:'var(--bd)',strokeDasharray:v?'3 3':undefined}),h('text',{x:34,y:base-v*sc+4,fontSize:10,textAnchor:'end',fill:'var(--tx2)'},v>0?'+'+v:String(v)))),
+    xs.map((e,i)=>{const x=60+i*96, on=e.id===sel;
+      const bar=(v,dx,c,k)=>h('rect',{key:k,x:x+dx,y:v>0?base-v*sc:base,width:32,height:Math.abs(v)*sc,fill:c});
+      return h('g',{key:e.id,tabIndex:0,role:'button','aria-label':e.id,style:{cursor:'pointer'},onClick:()=>setSel(e.id),onKeyDown:k=>{if(k.key==='Enter')setSel(e.id)}},
+        h('rect',{x:x-8,y:8,width:84,height:224,fill:on?'var(--pale)':'transparent'}),
+        e.d===null?h('text',{x:x+34,y:base-8,fontSize:10,textAnchor:'middle',fill:'var(--tx2)'},'unavailable'):[bar(e.d,0,on?'#0F62FE':'#B6C4DA',0),bar(e.o,34,on?'#78A9FF':'#D8E0EB',1)],
+        h('text',{x:x+34,y:244,fontSize:11,textAnchor:'middle',fill:'var(--tx)',fontFamily:'IBM Plex Mono'},e.id));})),
+    h('div',{style:{display:'flex',gap:16,fontSize:12,color:'var(--tx2)'}},h('span',null,'■ Depth Δ'),h('span',null,'■ Operations Δ')));
+}
+
+function Donut(){
+  const C=2*Math.PI*54, rows=[['Equivalent',7,'#198038'],['Not equivalent',2,'#DA1E28'],['Inconclusive',0,'#F1C21B']]; let off=0;
+  return h('div',{style:{display:'grid',gridTemplateColumns:'150px 1fr',gap:16,alignItems:'center'}},
+    h('svg',{viewBox:'0 0 140 140',role:'img','aria-label':'7 equivalent, 2 not equivalent, 0 inconclusive'},
+      h('circle',{cx:70,cy:70,r:54,fill:'none',stroke:'var(--bd)',strokeWidth:18}),
+      rows.filter(r=>r[1]).map(([n,v,c])=>{const len=v/9*C, el=h('circle',{key:n,cx:70,cy:70,r:54,fill:'none',stroke:c,strokeWidth:18,strokeDasharray:len+' '+(C-len),strokeDashoffset:-off,transform:'rotate(-90 70 70)'}); off+=len; return el;}),
+      h('text',{x:70,y:76,textAnchor:'middle',fontSize:22,fontWeight:600,fill:'var(--tx)'},'9')),
+    h('div',null,rows.map(([n,v,c])=>h('div',{className:'lg',key:n},h('span',{className:'dot',style:{background:c}}),n,h('b',null,v),h('span',{className:'mut'},Math.round(v/9*100)+'%')))));
+}
+
+function Records({sel,setSel,full}){
+  const list = full?EXP:EXP.slice(0,6);
+  return h('div',{className:'ov'},h('table',{className:'tb'},h('thead',null,h('tr',null,['ID','Category (heuristic)','Semantic (QCEC)'].map(t=>h('th',{key:t},t)))),
+    h('tbody',null,list.map(e=>h('tr',{key:e.id,'data-s':e.id===sel?1:0,onClick:()=>setSel(e.id)},h('td',null,h('b',null,e.id)),h('td',null,e.cat||h('span',{className:'un'},'unavailable')),h('td',null,badge(e)))))));
+}
+
+function Detail({sel}){
+  const e = EXP.find(x=>x.id===sel);
+  return h('div',{className:'c'},h('h3',null,'Selected: '+e.id),
+    h('div',{className:'mut'},'Verified by QCEC'),h('div',{style:{margin:'4px 0 12px'}},badge(e)),
+    h('div',{className:'mut'},'Heuristic category (not proof)'),h('div',{style:{margin:'4px 0 12px'}},e.cat?h('span',{className:'bg hv'},e.cat.toUpperCase()):h('span',{className:'un'},'unavailable')),
+    h('div',{className:'mut'},'Depth Δ / Operations Δ (approx.)'),h('div',{style:{margin:'4px 0 12px'}},fmt(e.d),' / ',fmt(e.o)),
+    h('div',{className:'mut'},'Two-qubit Δ, structural fields'),h('div',{className:'un',style:{marginTop:4}},'unavailable in loaded data'));
+}
+
+function Overview({sel,setSel,go}){
+  const K=(ic,t,v,d,b,bt)=>h('div',{className:'c',key:t},h('div',{className:'kh'},ic,t,h('span',{className:'bg '+b},bt)),h('div',{className:'big'},v),h('div',{className:'mut'},d));
+  return h('div',null,
+    h('h1',null,'Overview'),h('p',{className:'sub'},'Evidence-first profiling of Qiskit circuit transformations. We report what was measured, not why it changed.'),
+    h('div',{className:'g k3'},K('✓','Equivalent',7,'of 9 experiments proven equivalent','ok','QCEC'),K('!','Not equivalent',2,'E1 and E5 change the computation','bad','QCEC'),K('?','Inconclusive',0,'No unresolved equivalence checks','warn','QCEC')),
+    h('div',{className:'g r2'},
+      h('div',{className:'c'},h('h3',null,'Resource deltas by experiment',h('span',{className:'un'},'select an experiment')),h(Wide,{sel,setSel}),h('p',{className:'note'},'Candidate minus reference. Positive means inflation. Values are approximate, re-read from the earlier chart. E5 has no delta fields.')),
+      h(Detail,{sel})),
+    h('div',{className:'g r3'},
+      h('div',{className:'c'},h('h3',null,'Semantic outcomes'),h(Donut)),
+      h('div',{className:'c'},h('h3',null,'Recent experiment records',h('a',{href:'#',onClick:e=>{e.preventDefault();go('Experiment Explorer')},style:{fontSize:13,color:'var(--blue)'}},'Open explorer')),h(Records,{sel,setSel}))));
+}
+
+function Explorer({sel,setSel}){
+  return h('div',null,h('h1',null,'Experiment Explorer'),h('p',{className:'sub'},'Select a record. The verified result and the heuristic label are always shown separately.'),
+    h('div',{className:'g',style:{gridTemplateColumns:'minmax(0,1.6fr) minmax(0,1fr)'}},h('div',{className:'c'},h(Records,{sel,setSel,full:true}),h('p',{className:'note'},'L1–L3 status inferred from the 7 / 2 / 0 totals. Confirm against the dataset.')),h(Detail,{sel})));
+}
+
+function Table({title,note,cols,rows}){
+  return h('div',null,h('h1',null,title),h('p',{className:'sub'},note),h('div',{className:'c ov'},h('table',{className:'tb'},h('thead',null,h('tr',null,cols.map(c=>h('th',{key:c},c)))),h('tbody',null,rows.map((r,i)=>h('tr',{key:i,style:{cursor:'default'}},r.map((c,j)=>h('td',{key:j},c))))))));
+}
+
+function Method(){
+  const st=['Reference circuit','Candidate transformation','QCEC semantic check','Resource and structural profiling','Deterministic categorisation','Evidence report'];
+  const q=[['The checker establishes','Equivalent, not equivalent or inconclusive.'],['The profiler measures','Operations, depth, two-qubit operations, gate and interaction structure.'],['The categoriser infers','Rule-based labels from measured evidence. Heuristic, not proof.'],['The system cannot establish','Malicious intent, attacks or guaranteed compiler correctness.']];
+  return h('div',null,h('h1',null,'Methodology'),h('p',{className:'sub'},'Deterministic: the same inputs always produce the same report.'),
+    h('div',{className:'pipe'},st.map((t,i)=>h('div',{key:t,className:i===2||i===5?'k':''},t))),
+    h('div',{className:'g',style:{gridTemplateColumns:'repeat(auto-fit,minmax(220px,1fr))'}},q.map(([a,b],i)=>h('div',{className:'c',key:a,style:{borderTop:'3px solid '+['#198038','#0F62FE','#36C5F0','#DA1E28'][i]}},h('h3',null,a),h('p',{className:'mut',style:{margin:0,lineHeight:1.5}},b)))));
+}
+
+function Hero(){
+  const go=v=>e=>{e.preventDefault();window.dispatchEvent(new CustomEvent('nav',{detail:v}));document.getElementById('observatory').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});};
+  const S=(n,l,c)=>h('div',{key:l,className:'hs',style:{'--c':c}},h('b',{style:{color:c}},n),h('span',null,l));
+  return h('section',{className:'hero'},h('div',{className:'hwrap'},
+    h('div',{className:'hnav'},
+      h('a',{href:'#',style:{display:'flex',alignItems:'center',gap:10,fontWeight:600,fontSize:17,color:'#fff'}},h('svg',{width:26,height:26,viewBox:'0 0 28 28',fill:'none',stroke:'#fff',strokeWidth:2,'aria-hidden':true},h('circle',{cx:14,cy:14,r:9}),h('path',{d:'M2 14h24M14 5v18'})),'TranspileLens'),
+      h('nav',null,[['Overview','Overview'],['Experiments','Experiment Explorer'],['Resources','Resource Analysis'],['Structure','Structural Analysis'],['Methodology','Methodology']].map(([t,v])=>h('a',{key:t,href:'#observatory',onClick:go(v)},t))),
+      h('a',{className:'hbn p',style:{height:40},href:'#observatory',onClick:go('Overview')},'Open observatory')),
+    h('div',{className:'hgrid'},
+      h('div',null,h('p',{className:'eb'},'Quantum transformation intelligence'),h('h1',{className:'hh'},'See What Changes When Quantum Circuits Transform.'),h('p',{className:'hp'},'Understand quantum circuit transformations through semantic verification, resource analysis and interpretable structural evidence.'),
+        h('div',{className:'hcta'},h('a',{className:'hbn p',href:'#observatory',onClick:go('Overview')},'Explore the Observatory'),h('a',{className:'hbn s',href:'#observatory',onClick:go('Methodology')},'Discover the Methodology')),
+        h('p',{className:'hq'},'Report evidence, not intent.')),
+      h('div',{className:'herov'},h(Preview))),
+    h('div',{className:'hstats'},S(9,'experiments analysed','#10172A'),S(7,'proven equivalent','#198038'),S(2,'not equivalent','#DA1E28'),S(0,'inconclusive','#B28600'))));
+}
+const NAV=['Overview','Experiment Explorer','Resource Analysis','Structural Analysis','Methodology'];
+function App(){
+  const [v,setV]=useState('Overview'), [sel,setSel]=useState('E1');
+  useEffect(()=>{const f=e=>setV(e.detail);window.addEventListener('nav',f);return()=>window.removeEventListener('nav',f)},[]);
+  const view = {
+    'Overview':h(Overview,{sel,setSel,go:setV}),
+    'Experiment Explorer':h(Explorer,{sel,setSel}),
+    'Resource Analysis':h(Table,{title:'Resource Analysis',note:'Candidate minus reference. Missing fields are unavailable, never zero.',cols:['ID','Depth Δ (approx.)','Operations Δ (approx.)','Two-qubit Δ'],rows:EXP.map(e=>[e.id,fmt(e.d),fmt(e.o),fmt(null)])}),
+    'Structural Analysis':h(Table,{title:'Structural Analysis',note:'Charts appear only for fields present in the dataset. None are in the loaded data yet.',cols:['ID','Gate-distribution divergence','Interaction-graph evidence','Routing-heuristic output'],rows:EXP.map(e=>[e.id,fmt(null),fmt(null),fmt(null)])}),
+    'Methodology':h(Method)
+  }[v];
+  return h('div',{className:'app',id:'observatory'},
+    h('header',{className:'top'},h('div',{className:'brand'},h('svg',{width:22,height:22,viewBox:'0 0 28 28',fill:'none',stroke:'#0F62FE',strokeWidth:2,'aria-hidden':true},h('circle',{cx:14,cy:14,r:9}),h('path',{d:'M2 14h24M14 5v18'})),'TranspileLens'),h('input',{className:'search','aria-label':'Search experiments',placeholder:'Search experiments'})),
+    h('nav',{className:'side','aria-label':'Sections'},NAV.map(n=>h('button',{key:n,'aria-current':n===v?'page':undefined,onClick:()=>setV(n)},n)),h('small',null,'Evidence, not intent')),
+    h('main',null,view));
+}
+ReactDOM.createRoot(document.getElementById('root')).render(h(React.Fragment,null,h(Hero),h(App)));
+</script>
+</body>
+</html>

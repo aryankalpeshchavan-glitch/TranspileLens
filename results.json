@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "timestamp": 1791606908.906945,
+    "timestamp": 1791609043.4676058,
     "runner_version": "1.0"
   },
   "experiments": [
@@ -22,7 +22,7 @@
           "status": "not_equivalent",
           "reason": "none",
           "checker_version": "3.10.2",
-          "runtime_sec": 0.02182483673095703,
+          "runtime_sec": 0.05174970626831055,
           "error_details": null
         },
         "resources": {
@@ -115,7 +115,7 @@
           "status": "equivalent",
           "reason": "none",
           "checker_version": "3.10.2",
-          "runtime_sec": 0.01491689682006836,
+          "runtime_sec": 0.03493356704711914,
           "error_details": null
         },
         "resources": {
@@ -216,7 +216,7 @@
           "status": "equivalent",
           "reason": "none",
           "checker_version": "3.10.2",
-          "runtime_sec": 0.008086919784545898,
+          "runtime_sec": 0.015915632247924805,
           "error_details": null
         },
         "resources": {
@@ -323,7 +323,7 @@
           "status": "equivalent",
           "reason": "none",
           "checker_version": "3.10.2",
-          "runtime_sec": 0.006214141845703125,
+          "runtime_sec": 0.011204719543457031,
           "error_details": null
         },
         "resources": {
@@ -415,7 +415,7 @@
           "status": "not_equivalent",
           "reason": "none",
           "checker_version": "3.10.2",
-          "runtime_sec": 0.007100105285644531,
+          "runtime_sec": 0.010585546493530273,
           "error_details": null
         },
         "resources": {
@@ -509,7 +509,7 @@
           "status": "equivalent",
           "reason": "none",
           "checker_version": "3.10.2",
-          "runtime_sec": 0.01072239875793457,
+          "runtime_sec": 0.016843795776367188,
           "error_details": null
         },
         "resources": {

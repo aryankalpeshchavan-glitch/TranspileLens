@@ -47,26 +47,37 @@ The framework executes an artificial corpus (E1-E6) to test boundary conditions 
 Tested on Windows, Python 3.14.2, Qiskit 1.2+, and MQT QCEC.
 ```bash
 python -m venv .venv
-.venv\Scripts\activate
+.\.venv\Scripts\activate
 pip install .
-# or pip install qiskit mqt.qcec networkx scipy pydantic pytest
+```
+
+### Frontend Platform
+The platform uses React and Vite. Node.js is required.
+```bash
+cd frontend
+npm install
+npm run build
+npm run dev
 ```
 
 ## Commands
-**Run Tests:**
+**Run Backend Tests:**
 ```bash
 .\.venv\Scripts\pytest tests\
 ```
 
-**Generate Results:**
+**Generate Results (Backend):**
 ```bash
 .\.venv\Scripts\python scripts/runner.py --corpus ALL --output results.json
+# To view in frontend, copy to public:
+copy results.json frontend\public\results.json
 ```
 
 **View Dashboard:**
 ```bash
-python -m http.server 8000
-# Visit http://localhost:8000/dashboard.html
+cd frontend
+npm run dev
+# Visit http://localhost:5173
 ```
 
 ## Scientific Findings and Limitations
