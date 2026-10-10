@@ -12,5 +12,6 @@
 | M8 | Implemented | Deterministic evidence categorizer | `test_categorizer.py` | Passed | Validated | (pending) | Pending | Simple heuristic for optimization/synthesis boundaries |
 | M9 | Implemented | E1-E6 experimental corpus | `test_corpus.py` | Passed | Validated | `82e404d` | Success | Synthetic tests serve to bound heuristic limitations |
 | M10 | Implemented | Legitimate corpus & 5 baselines | `test_m10.py` (via runner) | Passed | Validated | (pending) | Pending | Raw diff/pass metrics limited by Qiskit post-hoc capabilities |
-| M11 | Implemented | Reproducible experiment runner | (manual execution) | Passed | Validated | (pending) | Pending | Produces results.json accurately representing structural profiles |
-| M12 | Implemented | Dashboard | (manual review) | Passed | Validated | (pending) | Pending | Simple HTML/JS to parse generated results locally |
+| M11 | Implemented | Reproducible experiment runner | (manual execution) | Passed | Validated | `4b896fd` | Success | Produces results.json accurately representing structural profiles |
+| M12 | Implemented | Dashboard | (manual review) | Passed | Validated | `9e21640` | Success | Simple HTML/JS to parse generated results locally |
+| M13 | Implemented | Final validation and release | `test_*` (all) | Passed | Validated | (pending) | Pending | Fully validated end-to-end, ready for release |
