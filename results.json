@@ -1,0 +1,681 @@
+{
+  "metadata": {
+    "timestamp": 1791606908.906945,
+    "runner_version": "1.0"
+  },
+  "experiments": [
+    {
+      "case_id": "E1",
+      "acceptance": "FAIL",
+      "profile": {
+        "metadata": {
+          "source_identifier": "E1",
+          "reference_identifier": "E1_ref",
+          "candidate_identifier": "E1_cand",
+          "qiskit_version": null,
+          "qcec_version": null,
+          "optimization_level": null,
+          "seed": null,
+          "schema_version": "1.0.0"
+        },
+        "semantic": {
+          "status": "not_equivalent",
+          "reason": "none",
+          "checker_version": "3.10.2",
+          "runtime_sec": 0.02182483673095703,
+          "error_details": null
+        },
+        "resources": {
+          "reference": {
+            "total_ops": 1,
+            "depth": 1,
+            "two_qubit_ops": 0,
+            "width": 1,
+            "gate_counts": {
+              "h": 1
+            }
+          },
+          "candidate": {
+            "total_ops": 2,
+            "depth": 2,
+            "two_qubit_ops": 0,
+            "width": 1,
+            "gate_counts": {
+              "ry": 1,
+              "z": 1
+            }
+          },
+          "deltas": {
+            "total_ops": {
+              "delta": 1,
+              "relative": 1.0
+            },
+            "depth": {
+              "delta": 1,
+              "relative": 1.0
+            },
+            "two_qubit_ops": {
+              "delta": 0,
+              "relative": null
+            }
+          }
+        },
+        "interaction_graph": {
+          "reference": {
+            "num_nodes": 1,
+            "num_edges": 0,
+            "density": 0.0
+          },
+          "candidate": {
+            "num_nodes": 1,
+            "num_edges": 0,
+            "density": 0.0
+          },
+          "added_edges": [],
+          "removed_edges": []
+        },
+        "gate_distribution": {
+          "reference": {},
+          "candidate": {},
+          "js_divergence": 0.6931471805599452
+        },
+        "measurement": {
+          "identical_mapping": true,
+          "mapping_differences_exist": false
+        },
+        "routing": {
+          "is_routing_consistent": false
+        },
+        "interpretation": {
+          "category_id": "1",
+          "category_name": "Logical computation change",
+          "evidence": "Semantic verifier explicitly reported inequivalence.",
+          "warnings": []
+        }
+      },
+      "expected_status": "equivalent",
+      "actual_status": "not_equivalent",
+      "category": "1"
+    },
+    {
+      "case_id": "E2",
+      "acceptance": "PASS",
+      "profile": {
+        "metadata": {
+          "source_identifier": "E2",
+          "reference_identifier": "E2_ref",
+          "candidate_identifier": "E2_cand",
+          "qiskit_version": null,
+          "qcec_version": null,
+          "optimization_level": null,
+          "seed": null,
+          "schema_version": "1.0.0"
+        },
+        "semantic": {
+          "status": "equivalent",
+          "reason": "none",
+          "checker_version": "3.10.2",
+          "runtime_sec": 0.01491689682006836,
+          "error_details": null
+        },
+        "resources": {
+          "reference": {
+            "total_ops": 8,
+            "depth": 8,
+            "two_qubit_ops": 4,
+            "width": 3,
+            "gate_counts": {
+              "cx": 3,
+              "h": 2,
+              "z": 2,
+              "cz": 1
+            }
+          },
+          "candidate": {
+            "total_ops": 4,
+            "depth": 3,
+            "two_qubit_ops": 2,
+            "width": 3,
+            "gate_counts": {
+              "u": 2,
+              "cz": 2
+            }
+          },
+          "deltas": {
+            "total_ops": {
+              "delta": -4,
+              "relative": -0.5
+            },
+            "depth": {
+              "delta": -5,
+              "relative": -0.625
+            },
+            "two_qubit_ops": {
+              "delta": -2,
+              "relative": -0.5
+            }
+          }
+        },
+        "interaction_graph": {
+          "reference": {
+            "num_nodes": 3,
+            "num_edges": 3,
+            "density": 1.0
+          },
+          "candidate": {
+            "num_nodes": 3,
+            "num_edges": 2,
+            "density": 0.6666666666666666
+          },
+          "added_edges": [],
+          "removed_edges": [
+            [
+              1,
+              2
+            ]
+          ]
+        },
+        "gate_distribution": {
+          "reference": {},
+          "candidate": {},
+          "js_divergence": 0.5367714232042614
+        },
+        "measurement": {
+          "identical_mapping": true,
+          "mapping_differences_exist": false
+        },
+        "routing": {
+          "is_routing_consistent": true
+        },
+        "interpretation": {
+          "category_id": "3",
+          "category_name": "Equivalent routing/layout",
+          "evidence": "Routing heuristics (like SWAP insertion or graph densification) observed.",
+          "warnings": []
+        }
+      },
+      "expected_status": "equivalent",
+      "actual_status": "equivalent",
+      "category": "3"
+    },
+    {
+      "case_id": "E3",
+      "acceptance": "PASS",
+      "profile": {
+        "metadata": {
+          "source_identifier": "E3",
+          "reference_identifier": "E3_ref",
+          "candidate_identifier": "E3_cand",
+          "qiskit_version": null,
+          "qcec_version": null,
+          "optimization_level": null,
+          "seed": null,
+          "schema_version": "1.0.0"
+        },
+        "semantic": {
+          "status": "equivalent",
+          "reason": "none",
+          "checker_version": "3.10.2",
+          "runtime_sec": 0.008086919784545898,
+          "error_details": null
+        },
+        "resources": {
+          "reference": {
+            "total_ops": 1,
+            "depth": 1,
+            "two_qubit_ops": 1,
+            "width": 3,
+            "gate_counts": {
+              "cx": 1
+            }
+          },
+          "candidate": {
+            "total_ops": 3,
+            "depth": 3,
+            "two_qubit_ops": 3,
+            "width": 3,
+            "gate_counts": {
+              "swap": 2,
+              "cx": 1
+            }
+          },
+          "deltas": {
+            "total_ops": {
+              "delta": 2,
+              "relative": 2.0
+            },
+            "depth": {
+              "delta": 2,
+              "relative": 2.0
+            },
+            "two_qubit_ops": {
+              "delta": 2,
+              "relative": 2.0
+            }
+          }
+        },
+        "interaction_graph": {
+          "reference": {
+            "num_nodes": 3,
+            "num_edges": 1,
+            "density": 0.3333333333333333
+          },
+          "candidate": {
+            "num_nodes": 3,
+            "num_edges": 2,
+            "density": 0.6666666666666666
+          },
+          "added_edges": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "removed_edges": [
+            [
+              0,
+              2
+            ]
+          ]
+        },
+        "gate_distribution": {
+          "reference": {},
+          "candidate": {},
+          "js_divergence": 0.31825708414740644
+        },
+        "measurement": {
+          "identical_mapping": true,
+          "mapping_differences_exist": false
+        },
+        "routing": {
+          "is_routing_consistent": true
+        },
+        "interpretation": {
+          "category_id": "3",
+          "category_name": "Equivalent routing/layout",
+          "evidence": "Routing heuristics (like SWAP insertion or graph densification) observed.",
+          "warnings": []
+        }
+      },
+      "expected_status": "equivalent",
+      "actual_status": "equivalent",
+      "category": "3"
+    },
+    {
+      "case_id": "E4",
+      "acceptance": "PASS",
+      "profile": {
+        "metadata": {
+          "source_identifier": "E4",
+          "reference_identifier": "E4_ref",
+          "candidate_identifier": "E4_cand",
+          "qiskit_version": null,
+          "qcec_version": null,
+          "optimization_level": null,
+          "seed": null,
+          "schema_version": "1.0.0"
+        },
+        "semantic": {
+          "status": "equivalent",
+          "reason": "none",
+          "checker_version": "3.10.2",
+          "runtime_sec": 0.006214141845703125,
+          "error_details": null
+        },
+        "resources": {
+          "reference": {
+            "total_ops": 1,
+            "depth": 1,
+            "two_qubit_ops": 0,
+            "width": 1,
+            "gate_counts": {
+              "x": 1
+            }
+          },
+          "candidate": {
+            "total_ops": 3,
+            "depth": 3,
+            "two_qubit_ops": 0,
+            "width": 1,
+            "gate_counts": {
+              "x": 3
+            }
+          },
+          "deltas": {
+            "total_ops": {
+              "delta": 2,
+              "relative": 2.0
+            },
+            "depth": {
+              "delta": 2,
+              "relative": 2.0
+            },
+            "two_qubit_ops": {
+              "delta": 0,
+              "relative": null
+            }
+          }
+        },
+        "interaction_graph": {
+          "reference": {
+            "num_nodes": 1,
+            "num_edges": 0,
+            "density": 0.0
+          },
+          "candidate": {
+            "num_nodes": 1,
+            "num_edges": 0,
+            "density": 0.0
+          },
+          "added_edges": [],
+          "removed_edges": []
+        },
+        "gate_distribution": {
+          "reference": {},
+          "candidate": {},
+          "js_divergence": 0.0
+        },
+        "measurement": {
+          "identical_mapping": true,
+          "mapping_differences_exist": false
+        },
+        "routing": {
+          "is_routing_consistent": false
+        },
+        "interpretation": {
+          "category_id": "6",
+          "category_name": "Resource-only change",
+          "evidence": "Resource metrics changed but without structural routing or synthesis signatures.",
+          "warnings": []
+        }
+      },
+      "expected_status": "equivalent",
+      "actual_status": "equivalent",
+      "category": "6"
+    },
+    {
+      "case_id": "E5",
+      "acceptance": "FAIL",
+      "profile": {
+        "metadata": {
+          "source_identifier": "E5",
+          "reference_identifier": "E5_ref",
+          "candidate_identifier": "E5_cand",
+          "qiskit_version": null,
+          "qcec_version": null,
+          "optimization_level": null,
+          "seed": null,
+          "schema_version": "1.0.0"
+        },
+        "semantic": {
+          "status": "not_equivalent",
+          "reason": "none",
+          "checker_version": "3.10.2",
+          "runtime_sec": 0.007100105285644531,
+          "error_details": null
+        },
+        "resources": {
+          "reference": {
+            "total_ops": 2,
+            "depth": 2,
+            "two_qubit_ops": 0,
+            "width": 1,
+            "gate_counts": {
+              "h": 1,
+              "measure": 1
+            }
+          },
+          "candidate": {
+            "total_ops": 2,
+            "depth": 2,
+            "two_qubit_ops": 0,
+            "width": 2,
+            "gate_counts": {
+              "h": 1,
+              "measure": 1
+            }
+          },
+          "deltas": {
+            "total_ops": {
+              "delta": 0,
+              "relative": 0.0
+            },
+            "depth": {
+              "delta": 0,
+              "relative": 0.0
+            },
+            "two_qubit_ops": {
+              "delta": 0,
+              "relative": null
+            }
+          }
+        },
+        "interaction_graph": {
+          "reference": {
+            "num_nodes": 1,
+            "num_edges": 0,
+            "density": 0.0
+          },
+          "candidate": {
+            "num_nodes": 2,
+            "num_edges": 0,
+            "density": 0.0
+          },
+          "added_edges": [],
+          "removed_edges": []
+        },
+        "gate_distribution": {
+          "reference": {},
+          "candidate": {},
+          "js_divergence": 0.0
+        },
+        "measurement": {
+          "identical_mapping": false,
+          "mapping_differences_exist": true
+        },
+        "routing": {
+          "is_routing_consistent": false
+        },
+        "interpretation": {
+          "category_id": "1",
+          "category_name": "Logical computation change",
+          "evidence": "Semantic verifier explicitly reported inequivalence.",
+          "warnings": []
+        }
+      },
+      "expected_status": "inconclusive",
+      "actual_status": "not_equivalent",
+      "category": "1"
+    },
+    {
+      "case_id": "E6",
+      "acceptance": "PASS",
+      "profile": {
+        "metadata": {
+          "source_identifier": "E6",
+          "reference_identifier": "E6_ref",
+          "candidate_identifier": "E6_cand",
+          "qiskit_version": null,
+          "qcec_version": null,
+          "optimization_level": null,
+          "seed": null,
+          "schema_version": "1.0.0"
+        },
+        "semantic": {
+          "status": "equivalent",
+          "reason": "none",
+          "checker_version": "3.10.2",
+          "runtime_sec": 0.01072239875793457,
+          "error_details": null
+        },
+        "resources": {
+          "reference": {
+            "total_ops": 1,
+            "depth": 1,
+            "two_qubit_ops": 1,
+            "width": 2,
+            "gate_counts": {
+              "cx": 1
+            }
+          },
+          "candidate": {
+            "total_ops": 3,
+            "depth": 3,
+            "two_qubit_ops": 3,
+            "width": 3,
+            "gate_counts": {
+              "cx": 3
+            }
+          },
+          "deltas": {
+            "total_ops": {
+              "delta": 2,
+              "relative": 2.0
+            },
+            "depth": {
+              "delta": 2,
+              "relative": 2.0
+            },
+            "two_qubit_ops": {
+              "delta": 2,
+              "relative": 2.0
+            }
+          }
+        },
+        "interaction_graph": {
+          "reference": {
+            "num_nodes": 2,
+            "num_edges": 1,
+            "density": 1.0
+          },
+          "candidate": {
+            "num_nodes": 3,
+            "num_edges": 2,
+            "density": 0.6666666666666666
+          },
+          "added_edges": [
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "removed_edges": [
+            [
+              0,
+              1
+            ]
+          ]
+        },
+        "gate_distribution": {
+          "reference": {},
+          "candidate": {},
+          "js_divergence": 0.0
+        },
+        "measurement": {
+          "identical_mapping": true,
+          "mapping_differences_exist": false
+        },
+        "routing": {
+          "is_routing_consistent": true
+        },
+        "interpretation": {
+          "category_id": "3",
+          "category_name": "Equivalent routing/layout",
+          "evidence": "Routing heuristics (like SWAP insertion or graph densification) observed.",
+          "warnings": []
+        }
+      },
+      "expected_status": "equivalent",
+      "actual_status": "equivalent",
+      "category": "3"
+    }
+  ],
+  "legitimate": [
+    {
+      "case_id": "L1",
+      "name": "QFT-3 O1",
+      "baselines": {
+        "B1": {
+          "added_lines": 0,
+          "removed_lines": 0
+        },
+        "B2": {
+          "status": "unsupported",
+          "reason": "Requires deep Qiskit compiler callback hooks not universally captured post-hoc."
+        },
+        "B3": {
+          "semantic_status": "equivalent",
+          "reason": "none"
+        },
+        "B4": {
+          "ref_ops": 7,
+          "cand_ops": 7,
+          "ops_delta": 0
+        },
+        "B5": {
+          "status": "supported"
+        }
+      }
+    },
+    {
+      "case_id": "L2",
+      "name": "QFT-3 O3",
+      "baselines": {
+        "B1": {
+          "added_lines": 0,
+          "removed_lines": 1
+        },
+        "B2": {
+          "status": "unsupported",
+          "reason": "Requires deep Qiskit compiler callback hooks not universally captured post-hoc."
+        },
+        "B3": {
+          "semantic_status": "equivalent",
+          "reason": "none"
+        },
+        "B4": {
+          "ref_ops": 7,
+          "cand_ops": 6,
+          "ops_delta": -1
+        },
+        "B5": {
+          "status": "supported"
+        }
+      }
+    },
+    {
+      "case_id": "L3",
+      "name": "GHZ-4 O3",
+      "baselines": {
+        "B1": {
+          "added_lines": 0,
+          "removed_lines": 0
+        },
+        "B2": {
+          "status": "unsupported",
+          "reason": "Requires deep Qiskit compiler callback hooks not universally captured post-hoc."
+        },
+        "B3": {
+          "semantic_status": "equivalent",
+          "reason": "none"
+        },
+        "B4": {
+          "ref_ops": 4,
+          "cand_ops": 4,
+          "ops_delta": 0
+        },
+        "B5": {
+          "status": "supported"
+        }
+      }
+    }
+  ]
+}
