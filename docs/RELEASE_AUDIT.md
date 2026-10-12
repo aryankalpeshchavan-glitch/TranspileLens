@@ -12,13 +12,15 @@
 - Tested on Python 3.14.2 via a fresh temporary virtual environment.
 - Qiskit >= 1.0, MQT QCEC confirmed working.
 - **Clean Installation:** `python -m pip install -e .` succeeded. 
-- **Tests:** `pytest tests/` successfully passed 22/22 tests with no skips or failures.
+- **Tests:** `pytest tests/` successfully passed 35/35 tests with no skips or failures.
 - **Experiment Runner:** Executed `python scripts/runner.py` successfully and produced valid JSON outputs representing E1-E6 and L1-L3 deterministically.
 
 ## 3. Experiment Results (E1-E6, L1-L3)
 - The generated `results.json` accurately models the expected semantic and structural metrics.
-- `E5` (Measurement mapping difference) correctly forces QCEC into an inconclusive state which the framework correctly persists, instead of fabricating equivalence.
-- `L3` (GHZ routing optimization) properly maps to Category 4 (Equivalent Optimization) without falsely flagging a heuristic attack.
+- `E1` (Basis rewrite) is proven mathematically and semantically equivalent via QCEC and categorized as synthesis.
+- `E2` (Synthesis optimization) is categorized as Category 5 (Synthesis) under general categorization rules prioritizing basis changes and operation reduction over routing heuristics.
+- `E5` (Measurement mapping difference) correctly evaluates under the defined equivalence contract without partial equivalence as `not_equivalent` with acceptance `PASS`.
+- `Interface Integrity`: Measurement mapping validation explicitly distinguishes missing evidence (unmeasured circuits) with status `missing` from genuine `pass` and `fail` outcomes.
 - Results are computed live from the profilers, without hardcoded expected profiles.
 
 ## 4. Baselines (B1-B5)
@@ -31,12 +33,12 @@
 ## 5. Scientific Claims
 - The framework successfully avoids claiming to detect Trojans or malware.
 - Category 7 is honestly defined as "Structurally unexplained" rather than malicious.
-- Measurement-mapping equivalence limitations are respected (it handles inconclusive accurately).
+- Measurement-mapping equivalence limitations and interface integrity are respected.
 - No inflated performance/precision metrics are claimed.
 
 ## 6. Tests
-- 22 Passed, 0 Failed, 0 Errored.
-- No assertions were improperly weakened. The synthesis categorizer test accurately patches the missing rule constraint from previous iterations.
+- 35 Passed, 0 Failed, 0 Errored.
+- Metamorphic regression tests rigorously validate equivalent rewrites, identity insertion, inequivalent controls, resource-only deltas, supported routing cases, and interface integrity.
 
 ## 7. Documentation (README.md)
 - Command instructions (runner, dashboard, tests) are strictly verified to match repo state.

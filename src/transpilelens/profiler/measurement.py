@@ -24,12 +24,16 @@ def compare_measurements(ref_qc: QuantumCircuit, cand_qc: QuantumCircuit) -> Dic
     ref_measured_qubits = set(ref_map.keys())
     cand_measured_qubits = set(cand_map.keys())
     
+    has_measurements = bool(ref_map or cand_map)
     # Are the classical destinations identical?
-    identical_mapping = ref_map == cand_map
+    # True if measurements exist and match; if unmeasured, identical_mapping is False (or distinguished by has_measurements)
+    mapping_differences = bool(ref_map != cand_map)
+    identical_mapping = (ref_map == cand_map) and has_measurements
     
     return {
+        "has_measurements": has_measurements,
         "identical_mapping": identical_mapping,
         "ref_measured_qubits": list(ref_measured_qubits),
         "cand_measured_qubits": list(cand_measured_qubits),
-        "mapping_differences_exist": not identical_mapping
+        "mapping_differences_exist": mapping_differences
     }

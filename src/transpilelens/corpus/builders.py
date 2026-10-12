@@ -34,10 +34,11 @@ def build_e1_reference() -> QuantumCircuit:
     return qc
     
 def build_e1_candidate(reference: QuantumCircuit) -> QuantumCircuit:
+    import numpy as np
     qc = QuantumCircuit(1)
     # y^(1/2) * z
-    qc.ry(3.14159265359 / 2, 0)
     qc.z(0)
+    qc.ry(np.pi / 2, 0)
     return qc
 
 def build_e3_reference() -> QuantumCircuit:

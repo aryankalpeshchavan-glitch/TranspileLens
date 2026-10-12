@@ -12,4 +12,4 @@ def test_corpus_execution():
         
         # We don't assert that acceptance is PASS for all because E5 is designed to be inconclusive/fail 
         # based on current QCEC mapping limitations. But we do assert it executes fully!
-        assert res["acceptance"] in ["PASS", "PARTIAL", "INCONCLUSIVE", "FAIL"]
+        assert res["acceptance"] in ["PASS", "FAIL"]

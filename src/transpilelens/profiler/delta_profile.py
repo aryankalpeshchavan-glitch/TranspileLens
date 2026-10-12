@@ -12,6 +12,8 @@ class ProfileMetadata(BaseModel):
     candidate_identifier: str
     qiskit_version: Optional[str] = None
     qcec_version: Optional[str] = None
+    python_version: Optional[str] = None
+    run_timestamp: Optional[str] = None
     optimization_level: Optional[int] = None
     seed: Optional[int] = None
     schema_version: str = "1.0.0"
@@ -39,6 +41,16 @@ class MeasurementDelta(BaseModel):
 class RoutingEvidence(BaseModel):
     is_routing_consistent: bool
 
+class InterfaceCheck(BaseModel):
+    check_name: str
+    status: str
+    evidence: Dict[str, Any]
+    explanation: str
+
+class InterfaceValidation(BaseModel):
+    checks: List[InterfaceCheck]
+
+
 class Interpretation(BaseModel):
     category_id: Optional[str] = None
     category_name: Optional[str] = None
@@ -53,6 +65,7 @@ class DeltaProfile(BaseModel):
     gate_distribution: GateDistributionDelta
     measurement: MeasurementDelta
     routing: RoutingEvidence
+    interface_validation: Optional[InterfaceValidation] = None
     interpretation: Optional[Interpretation] = None
 
     def to_json(self) -> str:

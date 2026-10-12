@@ -53,10 +53,11 @@ pip install .
 
 ### Frontend Platform
 The platform uses React and Vite. Node.js is required.
+See `frontend/README.md` for full deployment and architecture details.
+
 ```bash
 cd frontend
 npm install
-npm run build
 npm run dev
 ```
 
@@ -69,8 +70,10 @@ npm run dev
 **Generate Results (Backend):**
 ```bash
 .\.venv\Scripts\python scripts/runner.py --corpus ALL --output results.json
-# To view in frontend, copy to public:
-copy results.json frontend\public\results.json
+# Note: The frontend syncs this file automatically when building or starting the dev server.
+# To sync manually:
+cd frontend
+npm run sync:results
 ```
 
 **View Dashboard:**

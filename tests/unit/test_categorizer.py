@@ -60,3 +60,25 @@ def test_categorizer_no_delta():
     prof = make_dummy_profile(ops_delta=0)
     interp = categorize(prof)
     assert interp.category_id == "8"
+
+def test_e2_categorizer_not_routing():
+    # E2: optimization with ops reduction is not routing, even if routing evidence is asserted
+    prof = make_dummy_profile(ops_delta=-4, routing_consist=True, ref_vocab=["cx", "h", "z", "cz"], cand_vocab=["cz", "u"])
+    prof.interaction_graph.removed_edges = [[1, 2]]
+    interp = categorize(prof)
+    assert interp.category_id != "3", "Synthesis/optimization should not be classified as routing"
+    assert interp.category_id == "5", "Basis translation should be classified as synthesis"
+
+def test_optimization_with_graph_change_not_routing():
+    # Optimization where ops decreased must be Category 4, never Category 3
+    prof = make_dummy_profile(ops_delta=-2, routing_consist=True, ref_vocab=["cx"], cand_vocab=["cx"])
+    prof.interaction_graph.added_edges = [[0, 2]]
+    interp = categorize(prof)
+    assert interp.category_id == "4", "Operation reduction must be classified as optimization, not routing"
+
+def test_e3_e6_categorizer_routing():
+    # E3/E6: added edges or swaps without basis change and without ops reduction -> routing
+    prof = make_dummy_profile(ops_delta=2, routing_consist=True, ref_vocab=["cx"], cand_vocab=["cx"])
+    prof.interaction_graph.added_edges = [[0, 2]]
+    interp = categorize(prof)
+    assert interp.category_id == "3", "E3/E6 should be classified as routing"

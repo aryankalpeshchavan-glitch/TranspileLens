@@ -1,28 +1,30 @@
 {
   "metadata": {
-    "timestamp": 1791609043.4676058,
+    "timestamp": 1791819981.4582653,
     "runner_version": "1.0"
   },
   "experiments": [
     {
       "case_id": "E1",
-      "acceptance": "FAIL",
+      "acceptance": "PASS",
       "profile": {
         "metadata": {
           "source_identifier": "E1",
           "reference_identifier": "E1_ref",
           "candidate_identifier": "E1_cand",
-          "qiskit_version": null,
-          "qcec_version": null,
+          "qiskit_version": "2.5.2",
+          "qcec_version": "3.10.2",
+          "python_version": "3.14.2",
+          "run_timestamp": "2026-10-12T21:16:21.458377",
           "optimization_level": null,
           "seed": null,
           "schema_version": "1.0.0"
         },
         "semantic": {
-          "status": "not_equivalent",
+          "status": "equivalent",
           "reason": "none",
           "checker_version": "3.10.2",
-          "runtime_sec": 0.05174970626831055,
+          "runtime_sec": 0.013732194900512695,
           "error_details": null
         },
         "resources": {
@@ -41,8 +43,8 @@
             "two_qubit_ops": 0,
             "width": 1,
             "gate_counts": {
-              "ry": 1,
-              "z": 1
+              "z": 1,
+              "ry": 1
             }
           },
           "deltas": {
@@ -80,22 +82,46 @@
           "js_divergence": 0.6931471805599452
         },
         "measurement": {
-          "identical_mapping": true,
+          "identical_mapping": false,
           "mapping_differences_exist": false
         },
         "routing": {
           "is_routing_consistent": false
         },
+        "interface_validation": {
+          "checks": [
+            {
+              "check_name": "Measurement Mapping",
+              "status": "missing",
+              "evidence": {
+                "ref_qubits": [],
+                "cand_qubits": []
+              },
+              "explanation": "No measurement operations present in either circuit; mapping evidence unavailable."
+            },
+            {
+              "check_name": "Register Widths",
+              "status": "pass",
+              "evidence": {
+                "ref_qubits": 1,
+                "cand_qubits": 1,
+                "ref_clbits": 0,
+                "cand_clbits": 0
+              },
+              "explanation": "Number of qubits and classical bits match."
+            }
+          ]
+        },
         "interpretation": {
-          "category_id": "1",
-          "category_name": "Logical computation change",
-          "evidence": "Semantic verifier explicitly reported inequivalence.",
+          "category_id": "5",
+          "category_name": "Equivalent synthesis",
+          "evidence": "Gate vocabulary changed, suggesting synthesis or basis translation.",
           "warnings": []
         }
       },
       "expected_status": "equivalent",
-      "actual_status": "not_equivalent",
-      "category": "1"
+      "actual_status": "equivalent",
+      "category": "5"
     },
     {
       "case_id": "E2",
@@ -105,8 +131,10 @@
           "source_identifier": "E2",
           "reference_identifier": "E2_ref",
           "candidate_identifier": "E2_cand",
-          "qiskit_version": null,
-          "qcec_version": null,
+          "qiskit_version": "2.5.2",
+          "qcec_version": "3.10.2",
+          "python_version": "3.14.2",
+          "run_timestamp": "2026-10-12T21:16:21.489971",
           "optimization_level": null,
           "seed": null,
           "schema_version": "1.0.0"
@@ -115,7 +143,7 @@
           "status": "equivalent",
           "reason": "none",
           "checker_version": "3.10.2",
-          "runtime_sec": 0.03493356704711914,
+          "runtime_sec": 0.01532745361328125,
           "error_details": null
         },
         "resources": {
@@ -181,22 +209,46 @@
           "js_divergence": 0.5367714232042614
         },
         "measurement": {
-          "identical_mapping": true,
+          "identical_mapping": false,
           "mapping_differences_exist": false
         },
         "routing": {
-          "is_routing_consistent": true
+          "is_routing_consistent": false
+        },
+        "interface_validation": {
+          "checks": [
+            {
+              "check_name": "Measurement Mapping",
+              "status": "missing",
+              "evidence": {
+                "ref_qubits": [],
+                "cand_qubits": []
+              },
+              "explanation": "No measurement operations present in either circuit; mapping evidence unavailable."
+            },
+            {
+              "check_name": "Register Widths",
+              "status": "pass",
+              "evidence": {
+                "ref_qubits": 3,
+                "cand_qubits": 3,
+                "ref_clbits": 0,
+                "cand_clbits": 0
+              },
+              "explanation": "Number of qubits and classical bits match."
+            }
+          ]
         },
         "interpretation": {
-          "category_id": "3",
-          "category_name": "Equivalent routing/layout",
-          "evidence": "Routing heuristics (like SWAP insertion or graph densification) observed.",
+          "category_id": "5",
+          "category_name": "Equivalent synthesis",
+          "evidence": "Gate vocabulary changed, suggesting synthesis or basis translation.",
           "warnings": []
         }
       },
       "expected_status": "equivalent",
       "actual_status": "equivalent",
-      "category": "3"
+      "category": "5"
     },
     {
       "case_id": "E3",
@@ -206,8 +258,10 @@
           "source_identifier": "E3",
           "reference_identifier": "E3_ref",
           "candidate_identifier": "E3_cand",
-          "qiskit_version": null,
-          "qcec_version": null,
+          "qiskit_version": "2.5.2",
+          "qcec_version": "3.10.2",
+          "python_version": "3.14.2",
+          "run_timestamp": "2026-10-12T21:16:21.513369",
           "optimization_level": null,
           "seed": null,
           "schema_version": "1.0.0"
@@ -216,7 +270,7 @@
           "status": "equivalent",
           "reason": "none",
           "checker_version": "3.10.2",
-          "runtime_sec": 0.015915632247924805,
+          "runtime_sec": 0.010627508163452148,
           "error_details": null
         },
         "resources": {
@@ -288,11 +342,35 @@
           "js_divergence": 0.31825708414740644
         },
         "measurement": {
-          "identical_mapping": true,
+          "identical_mapping": false,
           "mapping_differences_exist": false
         },
         "routing": {
           "is_routing_consistent": true
+        },
+        "interface_validation": {
+          "checks": [
+            {
+              "check_name": "Measurement Mapping",
+              "status": "missing",
+              "evidence": {
+                "ref_qubits": [],
+                "cand_qubits": []
+              },
+              "explanation": "No measurement operations present in either circuit; mapping evidence unavailable."
+            },
+            {
+              "check_name": "Register Widths",
+              "status": "pass",
+              "evidence": {
+                "ref_qubits": 3,
+                "cand_qubits": 3,
+                "ref_clbits": 0,
+                "cand_clbits": 0
+              },
+              "explanation": "Number of qubits and classical bits match."
+            }
+          ]
         },
         "interpretation": {
           "category_id": "3",
@@ -313,8 +391,10 @@
           "source_identifier": "E4",
           "reference_identifier": "E4_ref",
           "candidate_identifier": "E4_cand",
-          "qiskit_version": null,
-          "qcec_version": null,
+          "qiskit_version": "2.5.2",
+          "qcec_version": "3.10.2",
+          "python_version": "3.14.2",
+          "run_timestamp": "2026-10-12T21:16:21.527836",
           "optimization_level": null,
           "seed": null,
           "schema_version": "1.0.0"
@@ -323,7 +403,7 @@
           "status": "equivalent",
           "reason": "none",
           "checker_version": "3.10.2",
-          "runtime_sec": 0.011204719543457031,
+          "runtime_sec": 0.006748199462890625,
           "error_details": null
         },
         "resources": {
@@ -380,11 +460,35 @@
           "js_divergence": 0.0
         },
         "measurement": {
-          "identical_mapping": true,
+          "identical_mapping": false,
           "mapping_differences_exist": false
         },
         "routing": {
           "is_routing_consistent": false
+        },
+        "interface_validation": {
+          "checks": [
+            {
+              "check_name": "Measurement Mapping",
+              "status": "missing",
+              "evidence": {
+                "ref_qubits": [],
+                "cand_qubits": []
+              },
+              "explanation": "No measurement operations present in either circuit; mapping evidence unavailable."
+            },
+            {
+              "check_name": "Register Widths",
+              "status": "pass",
+              "evidence": {
+                "ref_qubits": 1,
+                "cand_qubits": 1,
+                "ref_clbits": 0,
+                "cand_clbits": 0
+              },
+              "explanation": "Number of qubits and classical bits match."
+            }
+          ]
         },
         "interpretation": {
           "category_id": "6",
@@ -399,14 +503,16 @@
     },
     {
       "case_id": "E5",
-      "acceptance": "FAIL",
+      "acceptance": "PASS",
       "profile": {
         "metadata": {
           "source_identifier": "E5",
           "reference_identifier": "E5_ref",
           "candidate_identifier": "E5_cand",
-          "qiskit_version": null,
-          "qcec_version": null,
+          "qiskit_version": "2.5.2",
+          "qcec_version": "3.10.2",
+          "python_version": "3.14.2",
+          "run_timestamp": "2026-10-12T21:16:21.537729",
           "optimization_level": null,
           "seed": null,
           "schema_version": "1.0.0"
@@ -415,7 +521,7 @@
           "status": "not_equivalent",
           "reason": "none",
           "checker_version": "3.10.2",
-          "runtime_sec": 0.010585546493530273,
+          "runtime_sec": 0.005702495574951172,
           "error_details": null
         },
         "resources": {
@@ -480,6 +586,34 @@
         "routing": {
           "is_routing_consistent": false
         },
+        "interface_validation": {
+          "checks": [
+            {
+              "check_name": "Measurement Mapping",
+              "status": "fail",
+              "evidence": {
+                "ref_qubits": [
+                  0
+                ],
+                "cand_qubits": [
+                  1
+                ]
+              },
+              "explanation": "Measurement mapping differs between reference and candidate."
+            },
+            {
+              "check_name": "Register Widths",
+              "status": "fail",
+              "evidence": {
+                "ref_qubits": 1,
+                "cand_qubits": 2,
+                "ref_clbits": 1,
+                "cand_clbits": 2
+              },
+              "explanation": "Register widths differ: qubits (1 ref vs 2 cand), classical bits (1 ref vs 2 cand). Candidate introduced 1 auxiliary/ancilla qubit(s) (e.g. for detour routing)."
+            }
+          ]
+        },
         "interpretation": {
           "category_id": "1",
           "category_name": "Logical computation change",
@@ -487,7 +621,7 @@
           "warnings": []
         }
       },
-      "expected_status": "inconclusive",
+      "expected_status": "not_equivalent",
       "actual_status": "not_equivalent",
       "category": "1"
     },
@@ -499,8 +633,10 @@
           "source_identifier": "E6",
           "reference_identifier": "E6_ref",
           "candidate_identifier": "E6_cand",
-          "qiskit_version": null,
-          "qcec_version": null,
+          "qiskit_version": "2.5.2",
+          "qcec_version": "3.10.2",
+          "python_version": "3.14.2",
+          "run_timestamp": "2026-10-12T21:16:21.547491",
           "optimization_level": null,
           "seed": null,
           "schema_version": "1.0.0"
@@ -509,7 +645,7 @@
           "status": "equivalent",
           "reason": "none",
           "checker_version": "3.10.2",
-          "runtime_sec": 0.016843795776367188,
+          "runtime_sec": 0.007875680923461914,
           "error_details": null
         },
         "resources": {
@@ -580,11 +716,35 @@
           "js_divergence": 0.0
         },
         "measurement": {
-          "identical_mapping": true,
+          "identical_mapping": false,
           "mapping_differences_exist": false
         },
         "routing": {
           "is_routing_consistent": true
+        },
+        "interface_validation": {
+          "checks": [
+            {
+              "check_name": "Measurement Mapping",
+              "status": "missing",
+              "evidence": {
+                "ref_qubits": [],
+                "cand_qubits": []
+              },
+              "explanation": "No measurement operations present in either circuit; mapping evidence unavailable."
+            },
+            {
+              "check_name": "Register Widths",
+              "status": "fail",
+              "evidence": {
+                "ref_qubits": 2,
+                "cand_qubits": 3,
+                "ref_clbits": 0,
+                "cand_clbits": 0
+              },
+              "explanation": "Register widths differ: qubits (2 ref vs 3 cand). Candidate introduced 1 auxiliary/ancilla qubit(s) (e.g. for detour routing)."
+            }
+          ]
         },
         "interpretation": {
           "category_id": "3",

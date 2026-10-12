@@ -56,6 +56,30 @@ def categorize(profile: DeltaProfile) -> Interpretation:
             evidence="No measurable structural or resource differences detected."
         )
 
+    ref_vocab = set(res.reference.gate_counts.keys())
+    cand_vocab = set(res.candidate.gate_counts.keys())
+    non_routing_ref = ref_vocab - {"swap"}
+    non_routing_cand = cand_vocab - {"swap"}
+    ops_delta = res.deltas.get("total_ops", {}).get("delta", 0)
+
+    # Rule 5 - Equivalent synthesis
+    # If the non-routing gate vocabulary changed, it's basis synthesis/translation
+    if non_routing_ref != non_routing_cand:
+        return Interpretation(
+            category_id="5",
+            category_name="Equivalent synthesis",
+            evidence="Gate vocabulary changed, suggesting synthesis or basis translation."
+        )
+
+    # Rule 4 - Equivalent optimization
+    # If ops strictly decreased, it is optimization (never routing)
+    if ops_delta < 0:
+        return Interpretation(
+            category_id="4",
+            category_name="Equivalent optimization",
+            evidence="Total operations decreased significantly, suggesting optimization."
+        )
+
     # Rule 3 - Equivalent routing/layout
     if routing.is_routing_consistent:
         return Interpretation(
@@ -64,28 +88,8 @@ def categorize(profile: DeltaProfile) -> Interpretation:
             evidence="Routing heuristics (like SWAP insertion or graph densification) observed."
         )
         
-    # Rule 4 & 5 - We need context or advanced gate analysis. We'll simplify:
-    # If there's a different gate vocabulary, it's synthesis.
-    ref_vocab = set(res.reference.gate_counts.keys())
-    cand_vocab = set(res.candidate.gate_counts.keys())
-    if ref_vocab != cand_vocab:
-        return Interpretation(
-            category_id="5",
-            category_name="Equivalent synthesis",
-            evidence="Gate vocabulary changed, suggesting synthesis or basis translation."
-        )
-        
-    # If ops/depth strictly decreased or increased without new types, maybe optimization.
-    ops_delta = res.deltas.get("total_ops", {}).get("delta", 0)
-    if ops_delta < 0:
-        return Interpretation(
-            category_id="4",
-            category_name="Equivalent optimization",
-            evidence="Total operations decreased significantly, suggesting optimization."
-        )
-        
-    if ops_delta > 0 and not routing.is_routing_consistent:
-        # Ops increased but it's not routing, and gate vocab didn't change.
+    # Rule 6 - Resource-only change
+    if ops_delta > 0:
         return Interpretation(
             category_id="6",
             category_name="Resource-only change",
