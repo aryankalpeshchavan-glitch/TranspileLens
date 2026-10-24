@@ -1,58 +1,49 @@
 import React, { useState, useEffect, useMemo, useRef } from 'react';
 
-const NAV = ['Overview', 'Experiment Explorer', 'Resource Analysis', 'Structural Analysis', 'Methodology'];
+const NAV = ['Overview', 'Experiment Explorer', 'Resource Analysis', 'Structural Analysis', 'Methodology', 'Project Guide'];
 
 const badge = e => <span className={`bg ${e.s === 'ok' ? 'ok' : e.s === 'ne' ? 'bad' : 'warn'}`}>{e.s === 'ok' ? 'EQUIVALENT' : e.s === 'ne' ? 'INEQUIVALENT' : 'INCONCLUSIVE'}</span>;
 const fmt = v => (v === null || v === undefined) ? <span className="un">unavailable</span> : (v > 0 ? '+' + v : String(v));
 
 // Prototype preview for Hero
-function Preview() {
-  const E = [
-    {id:'E1', d:1, o:1}, {id:'E2', d:-4, o:-5}, {id:'E3', d:2, o:2},
-    {id:'E4', d:2, o:2}, {id:'E5', d:null, o:null}, {id:'E6', d:2, o:2}
+function Preview({ stats }) {
+  const steps = [
+    { title: 'Reference circuit', detail: 'The baseline computation' },
+    { title: 'Candidate circuit', detail: 'The transformed version' },
+    { title: 'QCEC semantic check', detail: 'Equivalent / not equivalent / inconclusive' },
+    { title: 'Delta profile', detail: 'Resources, topology and interface evidence' },
+    { title: 'Rule-based interpretation', detail: 'Deterministic category from measured evidence' },
+    { title: 'JSON + dashboard', detail: 'Inspectable, timestamped result snapshot' }
   ];
-  const C = 2 * Math.PI * 30;
+
   return (
-    <div className="pv" role="img" aria-label="Preview of the TranspileLens observatory dashboard">
-      <div className="pvt"><i></i><i></i><i></i><b>TranspileLens Observatory</b></div>
-      <div className="pvb">
-        <div className="pvs">
-          {NAV.map((n, i) => <div key={n} className={i ? '' : 'on'}>{n}</div>)}
-        </div>
-        <div className="pvm">
-          <div className="pvk">
-            {[['Equivalent',7,'#198038'], ['Not equivalent',2,'#DA1E28'], ['Inconclusive',0,'#B28600']].map(([n,v,c]) => (
-              <div key={n} style={{borderTop: '3px solid ' + c}}>
-                <small>{n}</small>
-                <b>{v}</b>
+    <div className="pv" aria-label="Illustrative TranspileLens analysis pipeline">
+      <div className="pvt">
+        <i></i><i></i><i></i>
+        <b>TranspileLens · Analysis Pipeline</b>
+        <span className="pv-label">ILLUSTRATIVE</span>
+      </div>
+      <div className="pv-flow">
+        {steps.map((step, index) => (
+          <React.Fragment key={step.title}>
+            <div className="pv-step">
+              <span className="pv-stepnum">{String(index + 1).padStart(2, '0')}</span>
+              <div>
+                <b>{step.title}</b>
+                <small>{step.detail}</small>
               </div>
-            ))}
-          </div>
-          <div className="pvr">
-            <div>
-              <small>Resource deltas</small>
-              <svg viewBox="0 0 220 110" style={{width: '100%'}}>
-                <line x1={0} x2={220} y1={55} y2={55} stroke="#D8E0EB"/>
-                {E.map((e, i) => e.d === null ?
-                  <text key={e.id} x={14+i*35} y={50} fontSize={7} fill="#526176">n/a</text> :
-                  <g key={e.id}>
-                    <rect x={8+i*35} y={e.d>0 ? 55-e.d*8 : 55} width={12} height={Math.abs(e.d)*8} fill="#0F62FE" />
-                    <rect x={21+i*35} y={e.o>0 ? 55-e.o*8 : 55} width={12} height={Math.abs(e.o)*8} fill="#A6C8FF" />
-                  </g>
-                )}
-                {E.map((e, i) => <text key={'l'+e.id} x={20+i*35} y={106} fontSize={8} textAnchor="middle" fill="#526176">{e.id}</text>)}
-              </svg>
             </div>
-            <div>
-              <small>Semantic outcomes</small>
-              <svg viewBox="0 0 80 80" style={{width: '100%', maxWidth: 96, display: 'block', margin: '6px auto'}}>
-                <circle cx={40} cy={40} r={30} fill="none" stroke="#198038" strokeWidth={11} strokeDasharray={(7/9*C) + ' ' + C} transform="rotate(-90 40 40)" />
-                <circle cx={40} cy={40} r={30} fill="none" stroke="#DA1E28" strokeWidth={11} strokeDasharray={(2/9*C) + ' ' + C} strokeDashoffset={-(7/9*C)} transform="rotate(-90 40 40)" />
-                <text x={40} y={45} textAnchor="middle" fontSize={15} fontWeight={600} fill="#161B2E">9</text>
-              </svg>
-            </div>
-          </div>
+            {index < steps.length - 1 && <div className="pv-down" aria-hidden="true">↓</div>}
+          </React.Fragment>
+        ))}
+      </div>
+      <div className="pv-foot">
+        <div className="pv-counts">
+          <div><b>{stats.eq}</b><span>QCEC equivalent</span></div>
+          <div><b>{stats.neq}</b><span>Not equivalent</span></div>
+          <div><b>{stats.inc}</b><span>Inconclusive</span></div>
         </div>
+        <p>Counts come from the loaded results snapshot. The website does not run new quantum compilations.</p>
       </div>
     </div>
   );
@@ -81,7 +72,7 @@ function Hero({ stats, navigateTo }) {
             TranspileLens
           </a>
           <nav>
-            {[['Overview', 'Overview'], ['Experiments', 'Experiment Explorer'], ['Resources', 'Resource Analysis'], ['Structure', 'Structural Analysis'], ['Methodology', 'Methodology']].map(([t, v]) => (
+            {[['Overview', 'Overview'], ['Experiments', 'Experiment Explorer'], ['Resources', 'Resource Analysis'], ['Structure', 'Structural Analysis'], ['Methodology', 'Methodology'], ['Project Guide', 'Project Guide']].map(([t, v]) => (
               <a key={t} href="#observatory" onClick={go(v)}>{t}</a>
             ))}
           </nav>
@@ -98,11 +89,11 @@ function Hero({ stats, navigateTo }) {
             </div>
             <p className="hq">Report evidence, not intent.</p>
           </div>
-          <div className="herov"><Preview /></div>
+          <div className="herov"><Preview stats={stats} /></div>
         </div>
         <div className="hstats">
           {S(stats.total, 'experiments analysed', '#10172A')}
-          {S(stats.eq, 'proven equivalent', '#198038')}
+          {S(stats.eq, 'QCEC equivalent', '#198038')}
           {S(stats.neq, 'not equivalent', '#DA1E28')}
           {S(stats.inc, 'inconclusive', '#B28600')}
         </div>
@@ -113,7 +104,7 @@ function Hero({ stats, navigateTo }) {
 
 function Wide({ list, sel, setSel }) {
   const [metric, setMetric] = useState('depth'); // 'depth', 'ops', 'twoQubit'
-  const sc = 18, base = 120;
+  const base = 120;
 
   const getVal = e => {
     if (metric === 'depth') return e.d;
@@ -124,6 +115,10 @@ function Wide({ list, sel, setSel }) {
 
   const metricLabel = metric === 'depth' ? 'Circuit Depth Δ' : metric === 'ops' ? 'Total Operations Δ' : 'Two-Qubit Operations Δ';
   const evalList = list.filter(x => !x.isLegit);
+  const availableValues = evalList.map(getVal).filter(v => typeof v === 'number' && Number.isFinite(v));
+  const maxAbs = Math.max(4, Math.ceil(Math.max(0, ...availableValues.map(Math.abs)) / 2) * 2);
+  const sc = 76 / maxAbs;
+  const ticks = [-maxAbs, -maxAbs / 2, 0, maxAbs / 2, maxAbs];
 
   return (
     <div>
@@ -154,7 +149,7 @@ function Wide({ list, sel, setSel }) {
         </div>
       </div>
       <svg viewBox="0 0 640 240" style={{width: '100%', height: 'auto'}} role="img" aria-label={`Resource deltas: ${metricLabel}`}>
-        {[-4, -2, 0, 2, 4].map(v => (
+        {ticks.map(v => (
           <g key={v}>
             <line x1={40} x2={630} y1={base - v*sc} y2={base - v*sc} stroke="var(--bd)" strokeDasharray={v ? '3 3' : undefined} />
             <text x={34} y={base - v*sc + 4} fontSize={10} textAnchor="end" fill="var(--tx2)">{v > 0 ? '+' + v : String(v)}</text>
@@ -415,7 +410,7 @@ function StructuralChart({ list, sel, setSel }) {
       <div style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: 10, marginBottom: 12}}>
         {evalList.map(e => {
           const on = e.id === sel;
-          const jsVal = e.gd !== null && e.gd !== undefined ? e.gd.toFixed(3) : '0.000';
+          const jsVal = e.gd !== null && e.gd !== undefined ? e.gd.toFixed(3) : 'N/A';
           const addEd = e.added_edges?.length || 0;
           const remEd = e.removed_edges?.length || 0;
           return (
@@ -441,7 +436,7 @@ function StructuralChart({ list, sel, setSel }) {
                 </span>
               </div>
               <div style={{fontSize: 11.5, color: 'var(--tx2)', lineHeight: 1.5}}>
-                <div><b>JS Div:</b> {jsVal}</div>
+                <div><b>JS Div:</b> {jsVal === 'N/A' ? <span className="un">N/A</span> : jsVal}</div>
                 <div><b>Edges Δ:</b> +{addEd} / -{remEd}</div>
               </div>
             </div>
@@ -554,6 +549,141 @@ function Table({ title, note, cols, rows }) {
           </tbody>
         </table>
       </div>
+    </div>
+  );
+}
+
+function ProjectGuide() {
+  const pipeline = [
+    { title: 'Reference + candidate', desc: 'Start with a reference circuit and a transformed candidate produced by a rewrite, optimization, synthesis, or routing scenario.' },
+    { title: 'Semantic check', desc: 'Ask MQT QCEC whether the circuits are equivalent, not equivalent, or inconclusive under the configured checking conditions.' },
+    { title: 'Measure differences', desc: 'Compare available gate counts, depth, two-qubit operations, interaction-graph edges, gate-distribution divergence, and measurement/interface evidence.' },
+    { title: 'Build a DeltaProfile', desc: 'Keep semantic outcomes separate from structural observations. Missing or unsupported fields remain unavailable rather than being turned into zero.' },
+    { title: 'Apply deterministic rules', desc: 'Map the collected evidence to a heuristic category. The label summarizes evidence; it does not prove which compiler pass ran.' },
+    { title: 'Publish a result snapshot', desc: 'Write structured JSON and render that snapshot in the dashboard with experiment details and signed deltas.' }
+  ];
+
+  const categories = [
+    'Logical computation change',
+    'Measurement-semantic change',
+    'Equivalent routing/layout',
+    'Equivalent optimization',
+    'Equivalent synthesis',
+    'Resource-only change',
+    'Semantically equivalent, structurally unexplained',
+    'Unclassified / no measurable delta'
+  ];
+
+  return (
+    <div className="guide">
+      <div className="guide-heading">
+        <span className="guide-kicker">PROJECT BRIEF · A TO Z</span>
+        <h1>What TranspileLens is—and what it is not</h1>
+        <p className="sub">A guided explanation of the problem, motivation, architecture, outputs, and scientific boundaries behind this research prototype.</p>
+      </div>
+
+      <div className="g guide-topgrid">
+        <section className="c guide-callout">
+          <span className="guide-tag">THE PROBLEM</span>
+          <h2>Equivalence alone does not explain the transformation.</h2>
+          <p>A quantum compiler can change gate sequences, circuit depth, operation counts, connectivity patterns, and measurement interfaces. A textual diff shows where text changed; an equivalence checker evaluates semantic preservation. Neither view, by itself, gives a complete, readable profile of the structural changes.</p>
+        </section>
+        <section className="c guide-callout">
+          <span className="guide-tag">WHY WE BUILT IT</span>
+          <h2>Make changes inspectable, not mysterious.</h2>
+          <p>TranspileLens was built to bring semantic results and measurable structural evidence into one repeatable report. The goal is to help a developer or researcher understand what changed between two circuit versions and which observations support that interpretation.</p>
+        </section>
+      </div>
+
+      <section className="c guide-section">
+        <div className="guide-sectionhead">
+          <div>
+            <span className="guide-tag">END-TO-END FLOW</span>
+            <h2>How it works</h2>
+          </div>
+          <span className="bg hv">Evidence-first pipeline</span>
+        </div>
+        <div className="guide-pipeline">
+          {pipeline.map((step, index) => (
+            <React.Fragment key={step.title}>
+              <div className="guide-step">
+                <span className="guide-stepnum">{String(index + 1).padStart(2, '0')}</span>
+                <div><h3>{step.title}</h3><p>{step.desc}</p></div>
+              </div>
+              {index < pipeline.length - 1 && <div className="guide-connector" aria-hidden="true">↓</div>}
+            </React.Fragment>
+          ))}
+        </div>
+      </section>
+
+      <div className="g guide-topgrid">
+        <section className="c">
+          <span className="guide-tag">WHAT IT MEASURES</span>
+          <h2>Evidence collected</h2>
+          <div className="guide-evidence">
+            <div><b>Semantic status</b><p>QCEC result: equivalent, not equivalent, or inconclusive.</p></div>
+            <div><b>Resource deltas</b><p>Candidate minus reference for available operation counts, circuit depth, and two-qubit operations.</p></div>
+            <div><b>Structural signals</b><p>Interaction-graph changes and gate-distribution divergence, where available.</p></div>
+            <div><b>Interface checks</b><p>Register-width and measurement-mapping evidence, including explicit missing-data states.</p></div>
+          </div>
+        </section>
+        <section className="c">
+          <span className="guide-tag">HOW TO READ THE RESULT</span>
+          <h2>Three semantic outcomes</h2>
+          <div className="guide-status">
+            <div><span className="bg ok">EQUIVALENT</span><p>The configured checker reports the circuits equivalent under its checking model and conditions.</p></div>
+            <div><span className="bg bad">NOT EQUIVALENT</span><p>The checker reports a semantic mismatch for the compared circuits.</p></div>
+            <div><span className="bg warn">INCONCLUSIVE</span><p>The check did not establish equivalence or inequivalence. This is not proof that the circuits differ.</p></div>
+          </div>
+        </section>
+      </div>
+
+      <section className="c guide-section">
+        <div className="guide-sectionhead">
+          <div><span className="guide-tag">DETERMINISTIC HEURISTICS</span><h2>Transformation categories</h2></div>
+          <span className="guide-note">Interpretation ≠ proof of compiler intent</span>
+        </div>
+        <div className="guide-categories">
+          {categories.map((category, index) => (
+            <div className="guide-category" key={category}>
+              <span>{String(index + 1).padStart(2, '0')}</span>
+              <b>{category}</b>
+            </div>
+          ))}
+        </div>
+        <p className="note">Category 7 means the transformation is semantically equivalent but the current rules do not adequately explain its observed structure. It does not mean malicious, unsafe, or a Trojan.</p>
+      </section>
+
+      <div className="g guide-topgrid">
+        <section className="c">
+          <span className="guide-tag">WHY NOT JUST USE…?</span>
+          <h2>Complementary, not replacement tooling</h2>
+          <div className="guide-compare">
+            <div><b>Text diff</b><p>Shows textual changes, which can be noisy after reordering or reformatting.</p></div>
+            <div><b>QCEC alone</b><p>Provides semantic equivalence outcomes, but not the complete structural profile presented here.</p></div>
+            <div><b>Resource counts alone</b><p>Summarize size and depth but do not establish whether computation was preserved.</p></div>
+            <div><b>TranspileLens</b><p>Combines these evidence types in a structured profile while keeping their limitations visible.</p></div>
+          </div>
+        </section>
+        <section className="c">
+          <span className="guide-tag">SCIENTIFIC BOUNDARIES</span>
+          <h2>What it does not claim</h2>
+          <ul className="guide-list">
+            <li>It is not a new quantum algorithm or a replacement for QCEC.</li>
+            <li>It is not a formal proof of which compiler pass executed.</li>
+            <li>It does not detect malware or establish malicious intent.</li>
+            <li>Its routing/synthesis labels are heuristic and may be imperfect.</li>
+            <li>The corpus is small; results do not establish universal accuracy or generalization.</li>
+            <li>The hosted dashboard renders a generated snapshot; it does not run live quantum compilation.</li>
+          </ul>
+        </section>
+      </div>
+
+      <section className="guide-bottom">
+        <b>Core principle</b>
+        <p>“Report evidence, not intent.”</p>
+        <span>TranspileLens helps explain observable changes between reference and candidate quantum circuits—without claiming more than the evidence supports.</span>
+      </section>
     </div>
   );
 }
@@ -793,7 +923,7 @@ export default function App() {
         />
       </div>
     ),
-    'Methodology': <Method />
+    'Methodology': <Method />,\n    'Project Guide': <ProjectGuide />
   }[v];
 
   return (

@@ -237,3 +237,80 @@ button:focus-visible, a:focus-visible, input:focus-visible, [tabindex]:focus-vis
     transform: none !important;
   }
 }
+
+
+/* --- ROUND 2: truthful pipeline preview and project guide --- */
+.pvt { align-items: center; }
+.pv-label {
+  margin-left: auto;
+  padding: 3px 6px;
+  border: 1px solid #C6D2E4;
+  color: #526176;
+  font: 500 9px 'IBM Plex Mono', monospace;
+  letter-spacing: .05em;
+}
+.pv-flow { padding: 14px; display: grid; gap: 5px; background: #F3F6FA; }
+.pv-step {
+  display: grid;
+  grid-template-columns: 32px 1fr;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 11px;
+  background: #fff;
+  border: 1px solid #D8E0EB;
+  border-left: 3px solid #0F62FE;
+}
+.pv-stepnum { color: #0F62FE; font: 500 11px 'IBM Plex Mono', monospace; }
+.pv-step b { display: block; font-size: 12px; color: #161B2E; }
+.pv-step small { display: block; margin-top: 2px; color: #526176; font-size: 10px; line-height: 1.4; }
+.pv-down { height: 8px; text-align: center; color: #0F62FE; font: 600 13px 'IBM Plex Mono', monospace; line-height: 8px; }
+.pv-foot { padding: 12px 14px 14px; }
+.pv-counts { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 8px; }
+.pv-counts > div { padding: 9px; background: #F3F6FA; border-top: 2px solid #0F62FE; }
+.pv-counts > div:nth-child(2) { border-top-color: #DA1E28; }
+.pv-counts > div:nth-child(3) { border-top-color: #B28600; }
+.pv-counts b { display: block; font-size: 23px; line-height: 1.1; color: #161B2E; }
+.pv-counts span { display: block; margin-top: 4px; font-size: 9px; color: #526176; }
+.pv-foot p { margin: 9px 0 0; color: #526176; font-size: 10px; line-height: 1.4; }
+
+.guide { max-width: 1240px; margin: 0 auto; }
+.guide-heading { margin-bottom: 18px; }
+.guide-heading h1 { margin: 7px 0 8px; font-size: clamp(28px, 3vw, 40px); font-weight: 500; letter-spacing: -.025em; }
+.guide-kicker, .guide-tag { color: var(--blue); font: 600 10px 'IBM Plex Mono', monospace; letter-spacing: .09em; }
+.guide-topgrid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+.guide-callout { border-top: 3px solid var(--blue); }
+.guide-callout h2, .guide-sectionhead h2, .guide > .g .c h2 { margin: 8px 0 10px; font-size: 20px; line-height: 1.25; font-weight: 500; letter-spacing: -.015em; }
+.guide-callout p { margin: 0; color: var(--tx2); line-height: 1.65; font-size: 14px; }
+.guide-section { margin-bottom: 16px; }
+.guide-sectionhead { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-bottom: 15px; flex-wrap: wrap; }
+.guide-sectionhead h2 { margin-bottom: 0; }
+.guide-note { color: var(--tx2); font-size: 11px; font-family: 'IBM Plex Mono', monospace; }
+.guide-pipeline { max-width: 920px; margin: 0 auto; }
+.guide-step { display: grid; grid-template-columns: 42px minmax(0,1fr); gap: 13px; padding: 14px 16px; border: 1px solid var(--bd); background: var(--card); }
+.guide-stepnum { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; background: var(--pale); color: var(--blue); font: 600 11px 'IBM Plex Mono', monospace; }
+.guide-step h3 { margin: 0 0 4px; font-size: 14px; font-weight: 600; }
+.guide-step p { margin: 0; color: var(--tx2); font-size: 12.5px; line-height: 1.55; }
+.guide-connector { height: 22px; margin-left: 16px; border-left: 1px solid var(--blue); color: var(--blue); padding-left: 10px; display: flex; align-items: center; font-size: 13px; }
+.guide-evidence, .guide-status, .guide-compare { display: grid; gap: 12px; margin-top: 14px; }
+.guide-evidence > div, .guide-compare > div { padding: 12px; background: var(--canvas); border-left: 2px solid var(--blue); }
+.guide-evidence b, .guide-compare b { font-size: 13px; }
+.guide-evidence p, .guide-compare p { margin: 4px 0 0; color: var(--tx2); line-height: 1.5; font-size: 12px; }
+.guide-status > div { padding-bottom: 11px; border-bottom: 1px solid var(--bd); }
+.guide-status p { margin: 7px 0 0; color: var(--tx2); line-height: 1.5; font-size: 12.5px; }
+.guide-categories { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 8px; }
+.guide-category { display: flex; gap: 11px; align-items: flex-start; padding: 12px; border: 1px solid var(--bd); background: var(--canvas); line-height: 1.4; font-size: 12.5px; }
+.guide-category span { color: var(--blue); font: 500 11px 'IBM Plex Mono', monospace; }
+.guide-list { margin: 13px 0 0; padding-left: 20px; color: var(--tx2); line-height: 1.65; font-size: 12.5px; }
+.guide-bottom { margin: 16px 0 0; padding: 24px; text-align: center; background: var(--navy); color: #fff; }
+.guide-bottom b { color: #A6C8FF; font: 600 10px 'IBM Plex Mono', monospace; letter-spacing: .1em; text-transform: uppercase; }
+.guide-bottom p { margin: 9px 0 5px; font-size: clamp(20px, 3vw, 30px); font-weight: 400; }
+.guide-bottom span { display: block; max-width: 720px; margin: 0 auto; color: #D6E4FF; font-size: 13px; line-height: 1.6; }
+
+@media (max-width: 760px) {
+  .pv-counts span { font-size: 8px; }
+  .guide-topgrid, .guide-categories { grid-template-columns: 1fr; }
+  .guide-sectionhead { align-items: flex-start; }
+  .guide-sectionhead h2 { font-size: 19px; }
+  .guide-step { padding: 12px; }
+  .guide-callout h2, .guide-sectionhead h2, .guide > .g .c h2 { font-size: 18px; }
+}
