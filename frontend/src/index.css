@@ -198,6 +198,133 @@ h1 { font-size: 32px; font-weight: 300; margin: 0 0 4px; }
 .circuit-line { stroke: var(--tx2); stroke-width: 1; }
 .circuit-gate { fill: var(--card); stroke: var(--blue); stroke-width: 1; }
 
+/* Interactive Callouts & Cards */
+.callout {
+  border-left: 3px solid var(--blue);
+  background: var(--card);
+  padding: 12px 16px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--tx2);
+  margin: 12px 0;
+  border-radius: 0 2px 2px 0;
+}
+.callout.warn { border-left-color: var(--warn); background: #FCF9EE; }
+.callout.info { border-left-color: var(--blue); background: var(--pale); color: #002D9C; }
+.callout.ok { border-left-color: var(--ok); background: #F1FAF3; }
+.callout.bad { border-left-color: var(--bad); background: #FFF1F1; }
+
+/* Architecture Flowchart Nodes */
+.flow-diagram {
+  background: #fff;
+  border: 1px solid var(--bd);
+  padding: 24px;
+  border-radius: 4px;
+  margin-bottom: 24px;
+}
+.flow-stream {
+  border: 1px solid var(--bd);
+  border-radius: 4px;
+  padding: 16px;
+  background: var(--canvas);
+}
+.flow-stream.semantic {
+  border-top: 3px solid #198038;
+}
+.flow-stream.structural {
+  border-top: 3px solid #0F62FE;
+}
+.flow-pill {
+  display: inline-block;
+  padding: 3px 8px;
+  font-size: 11px;
+  font-weight: 600;
+  border-radius: 2px;
+  font-family: 'IBM Plex Mono', monospace;
+}
+
+/* Category Matrix Cards */
+.cat-card {
+  background: var(--card);
+  border: 1px solid var(--bd);
+  padding: 16px;
+  border-radius: 2px;
+  transition: transform 140ms ease, box-shadow 140ms ease, border-color 140ms ease;
+}
+.cat-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--blue);
+  box-shadow: 0 4px 12px rgba(15, 98, 254, 0.08);
+}
+.cat-num {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--blue);
+  background: var(--pale);
+  padding: 2px 6px;
+  border-radius: 2px;
+  display: inline-block;
+  margin-bottom: 8px;
+}
+
+/* Project Guide Typography */
+.guide-prose {
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--tx);
+}
+.guide-prose p {
+  margin: 0 0 14px;
+}
+.guide-prose h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 24px 0 10px;
+  color: var(--navy);
+}
+.guide-prose ul {
+  padding-left: 20px;
+  margin: 0 0 16px;
+}
+.guide-prose li {
+  margin-bottom: 6px;
+  color: var(--tx2);
+}
+.guide-prose li strong {
+  color: var(--tx);
+}
+
+/* Sub-nav pills */
+.pill-group {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+.pill-btn {
+  font-size: 12px;
+  padding: 6px 14px;
+  cursor: pointer;
+  border: 1px solid var(--bd);
+  background: var(--card);
+  color: var(--tx);
+  border-radius: 2px;
+  font-family: inherit;
+  transition: background-color 140ms, color 140ms, border-color 140ms;
+}
+.pill-btn:hover {
+  background: var(--pale);
+  border-color: var(--blue);
+  color: var(--blue);
+}
+.pill-btn.active {
+  background: var(--blue);
+  color: #fff;
+  border-color: var(--blue);
+  font-weight: 600;
+}
+
 /* Accessibility & Focus Indicators */
 button:focus-visible, a:focus-visible, input:focus-visible, [tabindex]:focus-visible {
   outline: 2px solid var(--blue);
